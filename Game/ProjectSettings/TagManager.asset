@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Pickup
+  - Killzone
   layers:
   - Default
   - TransparentFX
