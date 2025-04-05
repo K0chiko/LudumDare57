@@ -75,6 +75,8 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
+        public bool controlEnabled = true;
+
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
@@ -132,6 +134,8 @@ namespace StarterAssets
 
         private void Update()
         {
+            if (!controlEnabled) return;
+
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
