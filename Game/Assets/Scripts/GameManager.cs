@@ -29,13 +29,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-  /*  private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
-            Destroy(other);
+            Destroy(other.gameObject);
         }
-    }*/
+    }
     private void oxygenBarColor()
     {
 
