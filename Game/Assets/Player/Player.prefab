@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7210765540000378335}
   - component: {fileID: 8776734567095118152}
+  - component: {fileID: 9061127984920062254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -80,6 +81,29 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+--- !u!136 &9061127984920062254
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40457475516714975}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.72
+  m_Height: 1.83
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &93208066352134476
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416eeb859944dfa46b88c16c981afd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraAdjustment: {x: 0, y: 4, z: -12}
+  cameraAdjustment: {x: 0, y: 1.4, z: -9}
   rotateX: 0
   rotateY: 0
   rotateZ: 0
