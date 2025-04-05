@@ -24,9 +24,18 @@ public class GameManager : MonoBehaviour
             oxygen = Mathf.Clamp01(oxygen);
         }
         
-       oxygenBarColor();
+        oxygenBarColor();
+
+
     }
 
+  /*  private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            Destroy(other);
+        }
+    }*/
     private void oxygenBarColor()
     {
 
