@@ -2,21 +2,22 @@ using StarterAssets;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    public Button oxygenButton;
     public float jumpForce;
     private Vector3 moveVector;
     Quaternion lastDirection;
-    private Vector3 horizontalInput;
+    public GameObject SaleWindow;
     public GameObject Rope;
 
     public float gravityModifier;
     private bool isOnGround = true;
     void Start()
     {
-
+        oxygenButton.onClick.AddListener(oxygenButtonResolve);
     }
 
     // Update is called once per frame
@@ -37,9 +38,16 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(" asdasd ");
             Rope.GetComponent<RopeToBase>().isRising = false;
-
+            SaleWindow.SetActive(true);
         }
     }
+
+    private void oxygenButtonResolve()
+    {
+        SaleWindow.SetActive(false);
+    }
+
+    
 }
 
 
