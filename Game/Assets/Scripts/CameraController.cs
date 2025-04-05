@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        cameraAdjustment = new(0f, 1.7f, -12f);
+        //cameraAdjustment = new(0f, 1.7f, -12f);
     }
 
     // Update is called once per frame
