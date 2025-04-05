@@ -1,3 +1,5 @@
+using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,25 +10,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVector;
     Quaternion lastDirection;
     private Vector3 horizontalInput;
-    private Rigidbody playerRB;
+    public GameObject Rope;
 
     public float gravityModifier;
     private bool isOnGround = true;
     void Start()
     {
-        playerRB = gameObject.GetComponent<Rigidbody>();
-        Physics.gravity *= gravityModifier;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
-        {
-            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
-        }
+      
 
     }
 
@@ -35,30 +31,14 @@ public class PlayerController : MonoBehaviour
         isOnGround = true;
     }
 
-    private void MovePlayer()
+    private void OnTriggerEnter(Collider other)
     {
-        horizontalInput = new(Input.GetAxis("Horizontal"), 0f, 0f);
-        Vector3 moveVector = horizontalInput * speed * Time.deltaTime;
-
-
-       
-
-        if (horizontalInput.x > 0)
+        if (other.gameObject.CompareTag("Bell"))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 0.1f);
-            lastDirection = transform.rotation;
+            Debug.Log(" asdasd ");
+            Rope.GetComponent<RopeToBase>().isRising = false;
+
         }
-        else if(horizontalInput.x < 0)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 180f, 0f), 0.1f);
-            lastDirection = transform.rotation;
-        }
-        else
-        {
-            transform.rotation = lastDirection;
-        }
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveVector), 0.1f);
-            playerRB.linearVelocity = new(moveVector.x, 0f, 0f);
     }
 }
 

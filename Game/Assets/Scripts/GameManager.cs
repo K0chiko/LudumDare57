@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,13 +30,24 @@ public class GameManager : MonoBehaviour
 
     }
 
-  /*  private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
-            Destroy(other);
+            Destroy(other.gameObject);
         }
-    }*/
+
+        if (other.gameObject.CompareTag("Killzone"))
+        {
+            RestartLevel();
+        }
+    }
+
+    public void RestartLevel()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
     private void oxygenBarColor()
     {
 

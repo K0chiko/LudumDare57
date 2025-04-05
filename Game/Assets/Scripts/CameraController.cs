@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     public float rotateX;
     public float rotateY;
     public float rotateZ;
+    public float closeDivider = 3f;
     void Start()
     {
         player = GameObject.Find("Player");
@@ -19,7 +20,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         cameraPosition = player.transform.position + cameraAdjustment;
-        transform.position = new(cameraPosition.x, cameraPosition.y, cameraPosition.z / 3);
+        transform.position = new(cameraPosition.x, cameraPosition.y, cameraPosition.z / closeDivider);
         cameraRotation = Quaternion.Euler(rotateX, rotateY, rotateZ);
         transform.rotation = cameraRotation;
     }
