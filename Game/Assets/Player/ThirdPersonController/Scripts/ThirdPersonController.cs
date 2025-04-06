@@ -98,6 +98,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        public float maxVertSpeed = 1f;
 
         private bool IsCurrentDeviceMouse
         {
@@ -318,7 +319,7 @@ namespace StarterAssets
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
-                _verticalVelocity += Gravity * Time.deltaTime;
+                _verticalVelocity += (Gravity + Gravity / maxVertSpeed * _verticalVelocity) * Time.deltaTime;
             }
         }
 
