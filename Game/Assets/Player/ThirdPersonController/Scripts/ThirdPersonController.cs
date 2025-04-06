@@ -274,7 +274,7 @@ namespace StarterAssets
                     }
                 }
 
-                if (Input.GetKeyDown(KeyCode.LeftControl) && _jumpTimeoutDelta <= 0.0f)
+                if (Input.GetMouseButtonDown(0) && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JetPackHeight * -2f * Gravity);

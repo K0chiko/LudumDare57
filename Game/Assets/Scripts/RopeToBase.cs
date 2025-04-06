@@ -1,5 +1,6 @@
 using StarterAssets;
 using UnityEngine;
+using System.Collections;
 
 public class RopeToBase : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class RopeToBase : MonoBehaviour
 
     public bool isRising = false;
 
+    private GameManager gameManager;
+    private BoxCollider boxCollider;
+
     void Start()
     {
-
+        gameManager = GameObject.Find("Player").GetComponent<GameManager>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.Log(player.GetComponent<ThirdPersonController>().controlEnabled);
@@ -21,14 +25,38 @@ public class RopeToBase : MonoBehaviour
         {
             player.GetComponent<ThirdPersonController>().transform.Translate(Vector3.up * riseSpeed * Time.deltaTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.Return) && gameManager.isUpgrade)
+        {
+            player.GetComponent<ThirdPersonController>().transform.Translate(Vector3.up * -riseSpeed * Time.deltaTime);
+        }
+
+        if (!gameManager.isUpgrade)
+        {
+            isRising = false;
+            player.GetComponent<ThirdPersonController>().controlEnabled = true;
+            StartCoroutine(DisableColliderTemporarily(5f));
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        player.GetComponent<ThirdPersonController>().controlEnabled = false;
         isRising = true;
+        player.GetComponent<ThirdPersonController>().controlEnabled = false;
+/*
+        if (!gameManager.isUpgrade)
+        {
 
+        }*/
 
+ 
+    }
+
+    IEnumerator DisableColliderTemporarily(float duration)
+    {
+        boxCollider.enabled = false;
+        yield return new WaitForSeconds(duration);
+        boxCollider.enabled = true;
     }
 }

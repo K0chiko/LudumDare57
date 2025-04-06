@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public int value;
+    public int pickupValue;
     void Start()
     {
         

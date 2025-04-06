@@ -9,6 +9,7 @@ TagManager:
   - Killzone
   - Home
   - Bell
+  - SaleWindow
   layers:
   - Default
   - TransparentFX
