@@ -1203,12 +1203,20 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: SprintSpeed
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: maxVertSpeed
-      value: 30
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: JetPackHeight
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1363,6 +1371,8 @@ MonoBehaviour:
   uiAudio:
   - {fileID: 8300000, guid: 0cea4bcbfb8bcc7428e7222d92701faa, type: 3}
   - {fileID: 8300000, guid: 4f77acec7c13b0b429588d7c2e82c0bf, type: 3}
+  oxygenUpgradeUpcost: 20
+  jetPackUpgradeUpcost: 20
 --- !u!136 &7157270675065252160
 CapsuleCollider:
   m_ObjectHideFlags: 0
