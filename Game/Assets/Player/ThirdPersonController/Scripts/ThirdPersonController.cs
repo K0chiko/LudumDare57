@@ -30,6 +30,7 @@ namespace StarterAssets
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
+        public AudioClip jetpackClip;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
         [Space(10)]
@@ -285,6 +286,11 @@ namespace StarterAssets
                     {
                         _animator.SetBool(_animIDJump, true);
                     }
+
+                    // Play sound of air tank filling up
+                    AudioSource jetpackSFX = Camera.main.gameObject.AddComponent<AudioSource>();
+                    jetpackSFX.clip = jetpackClip;
+                    jetpackSFX.Play();
                 }
 
                 // jump timeout
