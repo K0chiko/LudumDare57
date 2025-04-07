@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Gradient oxygenGradient;
 
     private float oxygenNormalized;
-    private float oxygenMax;
+    public float oxygenMax;
 
     public bool isUpgrade = true;
     Color currentColor;
@@ -79,6 +79,10 @@ public class GameManager : MonoBehaviour
         oxygenBarColor();
         UpgradeWindows();
 
+        if (oxygen <= 0)
+        {
+            RestartLevel();
+        }
 
     }
 
@@ -103,7 +107,7 @@ public class GameManager : MonoBehaviour
         if (other.gameObject.CompareTag("Bell"))
         {
             Debug.Log(" asdasd ");
-            rope.GetComponent<RopeToBase>().isRising = false;
+            //rope.GetComponent<RopeToBase>().isRising = false;
             saleWindow.SetActive(true);
             isUpgrade = true;
             oxygen = oxygenMax;
