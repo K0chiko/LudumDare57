@@ -125,15 +125,16 @@ public class GameManager : MonoBehaviour
     {
 
         currentColor = oxygenGradient.Evaluate(oxygenNormalized);
-
+        float emissionIntensity = 3f;
 
         foreach (Renderer oxyGen in oxygenIndicator)
         {
             if (oxyGen == null) continue;
 
+            Color emissionColor = currentColor * emissionIntensity;
             oxyGen.material.color = currentColor;
             oxyGen.material.EnableKeyword("_EMISSION");
-            oxyGen.material.SetColor("_EmissionColor", currentColor);
+            oxyGen.material.SetColor("_EmissionColor", emissionColor);
         }
     }
 
