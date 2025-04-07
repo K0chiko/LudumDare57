@@ -16,7 +16,7 @@ public class SFXManager : MonoBehaviour
 
     void Start()
     {
-        // Инициализация первого звука
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / 100f);
         currentClipIndex = GetClipIndex(oxygenNormalized);
         sourceA.clip = breathingClips[currentClipIndex];
@@ -39,6 +39,9 @@ public class SFXManager : MonoBehaviour
 
     int GetClipIndex(float oxygenNormalized)
     {
+        if (oxygenNormalized <= 0.05) {
+            return breathingClips.Length - 1;
+        }
         return Mathf.Clamp(4 - Mathf.FloorToInt(oxygenNormalized * 5f), 0, 4);
     }
 
