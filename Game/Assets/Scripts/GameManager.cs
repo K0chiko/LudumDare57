@@ -83,8 +83,7 @@ public class GameManager : MonoBehaviour
 
         oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
         oxygenNormalized = oxygen / oxygenMax;
-        Debug.Log("Нормализованный кислород: " + oxygenNormalized);
-        Debug.Log("Кислород: " + oxygen);
+
         oxygenBarColor();
         UpgradeWindows();
 
