@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && isUpgrade)
+        if (Input.GetKeyDown(KeyCode.Escape) && isUpgrade)
         {
             saleWindow.SetActive(false);
             isUpgrade = false;
