@@ -1,30 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform enemy;
+    public GameObject enemy;
+    public GameObject player;
     public float moveSpeed = 3f;
     public float stopDistance = 1f; 
     public bool isAttack = false;
     public bool hasReachedPlayer = false;
 
+    private bool isEnd = false;
+
+    private Vector3 direction;
     void Update()
     {
-        if (isAttack && enemy != null && !hasReachedPlayer)
+        if (isAttack && enemy != null)
         {
-            Vector3 direction = (transform.position - enemy.position);
-            float distance = direction.magnitude;
+            direction = (player.transform.position - enemy.transform.position).normalized;
+            enemy.transform.position += direction * moveSpeed * Time.deltaTime;
+        }
 
-            if (distance > stopDistance)
-            {
-                direction.Normalize();
-                enemy.position += direction * moveSpeed * Time.deltaTime;
-            }
-            else
-            {
-                hasReachedPlayer = true;
-                Debug.Log("Игра окончена!");
-            }
+        if (isEnd)
+        {
+            Debug.Log("YOU DEAD");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemy.gameObject.SetActive(true);
+            isAttack = true;
+            StartCoroutine(DelayedEnd());
+        }
+    }
+
+    IEnumerator DelayedEnd()
+{
+    yield return new WaitForSeconds(3f);
+    isEnd = true;
+}
 }
