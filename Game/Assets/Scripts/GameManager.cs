@@ -72,7 +72,10 @@ public class GameManager : MonoBehaviour
 
         }
 
-        oxygenNormalized = Mathf.Clamp01(oxygen);
+        oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
+        oxygenNormalized = oxygen / oxygenMax;
+        Debug.Log("Нормализованный кислород: " + oxygenNormalized);
+        Debug.Log("Кислород: " + oxygen);
         oxygenBarColor();
         UpgradeWindows();
 
@@ -132,11 +135,23 @@ public class GameManager : MonoBehaviour
 
     private void UpgradeWindows()
     {
+        /*        if (Input.GetKeyDown(KeyCode.Alpha1) && isUpgrade)
+                {
+                    value -= valueToOxygenTank;
+                    oxygen += oxygenIncrement;
+                    textValue.text = "Value: " + value;
+                }*/
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && isUpgrade)
         {
-            value -= valueToOxygenTank;
-            oxygen += oxygenIncrement;
-            textValue.text = "Value: " + value;
+            if (value >= valueToOxygenTank)
+            {
+                value -= valueToOxygenTank;
+                oxygenMax += oxygenIncrement;
+                oxygen += oxygenIncrement;
+                oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
+                textValue.text = "Value: " + value;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2) && isUpgrade)
