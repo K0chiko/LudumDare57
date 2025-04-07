@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public AudioClip[] uiAudio;
 
     private TextMeshProUGUI textValue;
-    private int currentClipIndex = -1;
+    private int currentClipIndex = 0;
 
     public int oxygenUpgradeUpcost = 20;
     public int jetPackUpgradeUpcost = 20;
