@@ -1,10 +1,12 @@
 using System.Collections;
+using StarterAssets;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public GameObject enemy;
     public GameObject player;
+    public GameObject YOUDIED;
     public float moveSpeed = 3f;
     public float stopDistance = 1f; 
     public bool isAttack = false;
@@ -24,6 +26,8 @@ public class Enemy : MonoBehaviour
         if (isEnd)
         {
             Debug.Log("YOU DEAD");
+            player.GetComponent<ThirdPersonController>().controlEnabled = false;
+            YOUDIED.gameObject.SetActive(true);
         }
     }
 
