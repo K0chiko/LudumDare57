@@ -8,6 +8,8 @@ public class SFXManager : MonoBehaviour
     public GameManager gameManager;
     public float fadeDuration = 1f;
 
+
+
     private int currentClipIndex = -1;
     private bool isSourceAActive = true;
     private float fadeTimer = 0f;

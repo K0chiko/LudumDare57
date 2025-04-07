@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.VisualScripting.Member;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,8 +40,11 @@ public class GameManager : MonoBehaviour
     public bool isUpgrade = true;
     Color currentColor;
 
-    private TextMeshProUGUI textValue;
+    public AudioSource uiSourceSFX;
+    public AudioClip[] uiAudio;
 
+    private TextMeshProUGUI textValue;
+    private int currentClipIndex = -1;
 
     void Start()
     {
@@ -50,6 +54,8 @@ public class GameManager : MonoBehaviour
         textValue.text = "Value: " + value;
 
         rope = GameObject.Find("Rope");
+
+        uiSourceSFX.clip = uiAudio[currentClipIndex];
     }
 
     // Update is called once per frame
@@ -156,14 +162,33 @@ public class GameManager : MonoBehaviour
                 oxygen += oxygenIncrement;
                 oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
                 textValue.text = "Value: " + value;
+
+                uiSourceSFX.clip = uiAudio[1];
+                uiSourceSFX.Play();
+            }
+            else
+            {
+                uiSourceSFX.clip = uiAudio[0];
+                uiSourceSFX.Play();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2) && isUpgrade)
         {
-            value -= valueToJetPackConsumption;
-            jetPackOxygenConsuption -= jetPackDecrement;
-            textValue.text = "Value: " + value;
+            if (value >= valueToJetPackConsumption)
+            {
+                value -= valueToJetPackConsumption;
+                jetPackOxygenConsuption -= jetPackDecrement;
+                textValue.text = "Value: " + value;
+
+                uiSourceSFX.clip = uiAudio[1];
+                uiSourceSFX.Play();
+            }
+            else
+            {
+                uiSourceSFX.clip = uiAudio[0];
+                uiSourceSFX.Play();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Return) && isUpgrade)
