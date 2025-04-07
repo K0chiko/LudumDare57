@@ -65,6 +65,8 @@ public class RopeToBase : MonoBehaviour
     private GameManager gameManager;
     private BoxCollider boxCollider;
 
+    public AudioClip airTankFillUpClip;
+
     void Start()
     {
         gameManager = GameObject.Find("Player").GetComponent<GameManager>();
@@ -78,6 +80,11 @@ public class RopeToBase : MonoBehaviour
             gameManager.saleWindow.SetActive(true);
             gameManager.isUpgrade = true;
             gameManager.oxygen = gameManager.oxygenMax;
+
+            // Play sound of air tank filling up
+            AudioSource airTankFillUpSFX = player.AddComponent<AudioSource>();
+            airTankFillUpSFX.clip = airTankFillUpClip;
+            airTankFillUpSFX.Play();
         }
     }
 }
