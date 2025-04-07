@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI textValue;
     private int currentClipIndex = -1;
 
+    public int oxygenUpgradeUpcost = 20;
+    public int jetPackUpgradeUpcost = 20;
+
     void Start()
     {
         //oxygen = 100f;
@@ -158,6 +161,7 @@ public class GameManager : MonoBehaviour
             if (value >= valueToOxygenTank)
             {
                 value -= valueToOxygenTank;
+                valueToOxygenTank += oxygenUpgradeUpcost;
                 oxygenMax += oxygenIncrement;
                 oxygen += oxygenIncrement;
                 oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
@@ -175,9 +179,10 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2) && isUpgrade)
         {
-            if (value >= valueToJetPackConsumption)
+            if (value >= valueToJetPackConsumption && jetPackOxygenConsuption >= 1000)
             {
                 value -= valueToJetPackConsumption;
+                valueToJetPackConsumption += jetPackUpgradeUpcost;
                 jetPackOxygenConsuption -= jetPackDecrement;
                 textValue.text = "Value: " + value;
 
