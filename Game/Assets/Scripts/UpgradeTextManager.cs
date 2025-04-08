@@ -32,6 +32,6 @@ public class UpgradeTextManager : MonoBehaviour
     $"<color=yellow>Cost: {gameManager.valueToJetPackConsumption}</color>\n" +
     $"Oxygen Consumption: <color=green>{(int)gameManager.jetPackOxygenConsuption} → {gameManager.jetPackOxygenConsuption - gameManager.jetPackDecrement}</color>\n\n" +
 
-    $"<b>Press \"Esc\" to exit the menu</b>";
+    $"<b>Press \"Enter\" to exit the menu</b>";
     }
 }
