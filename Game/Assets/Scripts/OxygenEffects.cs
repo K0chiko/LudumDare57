@@ -4,7 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class OxygenEffects : MonoBehaviour
 {
-    public GameManager gameManager; 
+    private GameManager gameManager; 
     public Volume globalVolume;
 
     private Vignette vignette;
@@ -15,6 +15,7 @@ public class OxygenEffects : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         if (globalVolume.profile.TryGet(out vignette))
         {
             vignette.active = true;

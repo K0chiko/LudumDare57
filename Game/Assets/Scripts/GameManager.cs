@@ -14,15 +14,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Расход кислорода при прыжке с ранцем.")]
     public float jetPackOxygenConsuption = 50000.0f;
 
-    [Space(10)]
-    [Tooltip("Стоимость прокачки балона.")]
-    public int valueToOxygenTank;
-    [Tooltip("Стоимость прокачки ранца.")]
-    public int valueToJetPackConsumption;
-    [Tooltip("Число, на которое увеличивается балон при прокачке.")]
-    public int oxygenIncrement;
-    [Tooltip("Число, на которое уменьшается расход кислорода ранца при прокачке.")]
-    public int jetPackDecrement;
+
 
     [Space(50)]
     public Renderer[] oxygenIndicator;
@@ -37,24 +29,22 @@ public class GameManager : MonoBehaviour
     private float oxygenNormalized;
     public float oxygenMax;
 
-    public bool isUpgrade = true;
+
     Color currentColor;
 
     public AudioSource uiSourceSFX;
     public AudioClip[] uiAudio;
 
-    private TextMeshProUGUI textValue;
+
     private int currentClipIndex = 0;
 
-    public int oxygenUpgradeUpcost = 20;
-    public int jetPackUpgradeUpcost = 20;
+    private UIController uiController;
 
     void Start()
     {
-        //oxygen = 100f;
+        uiController = GameObject.Find("UI").GetComponent<UIController>();
         oxygenMax = oxygen;
-        textValue = GameObject.Find("Value").GetComponent<TextMeshProUGUI>();
-        textValue.text = "Value: " + value;
+
 
         rope = GameObject.Find("Rope");
 
@@ -85,7 +75,6 @@ public class GameManager : MonoBehaviour
         oxygenNormalized = oxygen / oxygenMax;
 
         oxygenBarColor();
-        UpgradeWindows();
 
         if (oxygen <= 0)
         {
@@ -102,7 +91,7 @@ public class GameManager : MonoBehaviour
             if (pickup != null)
             {
                 value += pickup.pickupValue;
-                textValue.text = "Value: " + value;
+                uiController.textValue.text = "Value: " + value;
             }
             Destroy(other.gameObject);
         }
@@ -112,14 +101,14 @@ public class GameManager : MonoBehaviour
             RestartLevel();
         }
 
-        if (other.gameObject.CompareTag("Bell"))
+/*        if (other.gameObject.CompareTag("Bell"))
         {
             Debug.Log(" asdasd ");
             //rope.GetComponent<RopeToBase>().isRising = false;
             saleWindow.SetActive(true);
-            isUpgrade = true;
+            upgradeManager.isUpgrade = true;
             oxygen = oxygenMax;
-        }
+        }*/
      }
        
     
@@ -146,60 +135,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpgradeWindows()
-    {
-        /*        if (Input.GetKeyDown(KeyCode.Alpha1) && isUpgrade)
-                {
-                    value -= valueToOxygenTank;
-                    oxygen += oxygenIncrement;
-                    textValue.text = "Value: " + value;
-                }*/
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && isUpgrade)
-        {
-            if (value >= valueToOxygenTank)
-            {
-                value -= valueToOxygenTank;
-                valueToOxygenTank += oxygenUpgradeUpcost;
-                oxygenMax += oxygenIncrement;
-                oxygen += oxygenIncrement;
-                oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
-                textValue.text = "Value: " + value;
-
-                uiSourceSFX.clip = uiAudio[1];
-                uiSourceSFX.Play();
-            }
-            else
-            {
-                uiSourceSFX.clip = uiAudio[0];
-                uiSourceSFX.Play();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2) && isUpgrade)
-        {
-            if (value >= valueToJetPackConsumption && jetPackOxygenConsuption >= 1000)
-            {
-                value -= valueToJetPackConsumption;
-                valueToJetPackConsumption += jetPackUpgradeUpcost;
-                jetPackOxygenConsuption -= jetPackDecrement;
-                textValue.text = "Value: " + value;
-
-                uiSourceSFX.clip = uiAudio[1];
-                uiSourceSFX.Play();
-            }
-            else
-            {
-                uiSourceSFX.clip = uiAudio[0];
-                uiSourceSFX.Play();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) && isUpgrade)
-        {
-            saleWindow.SetActive(false);
-            isUpgrade = false;
-        }
-    }
+    
 
 }
