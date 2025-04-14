@@ -1,7 +1,6 @@
 ﻿ using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
-#endif
+
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -9,17 +8,16 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
-#endif
+
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
-        [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
+        [Tooltip("Crouch speed of the character in m/s")]
+        public float CrouchSpeed = 1.5f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -86,22 +84,23 @@ namespace StarterAssets
         private int _animIDSpeed;
         private int _animIDGrounded;
         private int _animIDJump;
+        private int _animIDCrouch;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+
         private PlayerInput _playerInput;
-#endif
+
         private Animator _animator;
         private CharacterController _controller;
-        private StarterAssetsInputs _input;
+        private Inputs _input;
 
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
         public float maxVertSpeed = 1f;
 
-        private bool IsCurrentDeviceMouse
+/*        private bool IsCurrentDeviceMouse
         {
             get
             {
@@ -110,8 +109,8 @@ namespace StarterAssets
 #else
 				return false;
 #endif
-            }
-        }
+            }*/
+       // }
 
 
 
@@ -120,12 +119,10 @@ namespace StarterAssets
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+            _input = GetComponent<Inputs>();
+
             _playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
+
 
             AssignAnimationIDs();
 
@@ -155,6 +152,7 @@ namespace StarterAssets
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");
+            _animIDCrouch = Animator.StringToHash("Crouch");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
@@ -178,8 +176,28 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = 0f;
+            // set target speed based on move speed, crouch speed and if sprint is pressed
+            //float targetSpeed = _input.crouch ? CrouchSpeed : MoveSpeed;
+            if (_input.crouch)
+            {
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDCrouch, true);
+                    targetSpeed = CrouchSpeed;
+                    _controller.height = 1.0f;
+                }
+            }
+            else
+            {
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDCrouch, false);
+                    targetSpeed = MoveSpeed;
+                    _controller.height = 1.8f;
+                }
+            }
+
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

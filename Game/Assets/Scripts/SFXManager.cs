@@ -12,11 +12,10 @@ public class SFXManager : MonoBehaviour
 
     private int currentClipIndex = -1;
     private bool isSourceAActive = true;
-    private float fadeTimer = 0f;
+    //private float fadeTimer = 0f;
 
     void Start()
     {
-        // ������������� ������� �����
         float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / 100f);
         currentClipIndex = GetClipIndex(oxygenNormalized);
         sourceA.clip = breathingClips[currentClipIndex];

@@ -8,10 +8,11 @@ public class CameraTrigger : MonoBehaviour
 
     private CameraController cameraController;
     private float originalZ;
-    private bool inZone = false;
+    private bool inZone;
 
     void Start()
     {
+        inZone = false;
         GameObject cameraObj = Camera.main.gameObject;
         cameraController = cameraObj.GetComponent<CameraController>();
         originalZ = cameraController.cameraAdjustment.z;
