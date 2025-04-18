@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4019504739840170661}
   - component: {fileID: 2994566404103834399}
   - component: {fileID: 2513367030678657588}
+  - component: {fileID: 3994876302406357145}
   m_Layer: 0
   m_Name: Pickup_Rare
   m_TagString: Pickup
@@ -114,6 +115,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupValue: 15
+--- !u!114 &3994876302406357145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584955216921725901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f966c6eb14ee7334bbc38ce88d8ca9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressEPrefab: {fileID: 6140488360817770851, guid: 14eeffce569433e43877d19ee238336c, type: 3}
 --- !u!1001 &5562291232025675007
 PrefabInstance:
   m_ObjectHideFlags: 0
