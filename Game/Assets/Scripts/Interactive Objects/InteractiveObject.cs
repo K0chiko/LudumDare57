@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class InteractiveObject : MonoBehaviour, IInteractable, IShowPrompt
+public class InteractiveObject : MonoBehaviour, IInteractable//, IShowPrompt
 {
-    public GameObject pressEPrefab;
-    private GameObject _promptInstance;
+/*    public GameObject pressEPrefab;
+    private GameObject _promptInstance;*/
 
-    public void ShowPrompt() 
+/*    public void ShowPrompt() 
     {
         if (_promptInstance == null)
         {
@@ -29,10 +29,9 @@ public class InteractiveObject : MonoBehaviour, IInteractable, IShowPrompt
             Debug.Log("Destroy!");
             _promptInstance = null;
         }
-    }
+    }*/
     public void Interact(GameObject interactor)
     {
-        Debug.Log("MovableBox!");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

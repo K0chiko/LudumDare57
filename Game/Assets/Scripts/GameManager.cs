@@ -85,16 +85,6 @@ public class GameManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup"))
-        {
-            Pickup pickup = other.GetComponent<Pickup>();
-            if (pickup != null)
-            {
-                value += pickup.pickupValue;
-                uiController.textValue.text = "Value: " + value;
-            }
-            Destroy(other.gameObject);
-        }
 
         if (other.gameObject.CompareTag("Killzone"))
         {

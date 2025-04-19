@@ -24,7 +24,7 @@ public class Interactor : MonoBehaviour
         {
             if (lastInteractable is IShowPrompt oldPrompt)
                 oldPrompt.HidePrompt();
-
+            
             if (currentInteractable is IShowPrompt newPrompt)
                 newPrompt.ShowPrompt();
 
@@ -45,6 +45,8 @@ void Update()
         {
             if (currentInteractable is IShowPrompt prompt)
                 prompt.HidePrompt();
+            if (currentInteractable is IDestroyable obj)
+                obj.Destroy();
             currentInteractable.Interact(gameObject);
             currentInteractable = null;
         }
