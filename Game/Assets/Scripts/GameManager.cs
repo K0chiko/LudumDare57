@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         oxygen = Mathf.Clamp(oxygen, 0f, oxygenMax);
         oxygenNormalized = oxygen / oxygenMax;
 
-        oxygenBarColor();
+        OxygenBarColor();
 
         if (oxygen <= 0)
         {
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
-    private void oxygenBarColor()
+    private void OxygenBarColor()
     {
 
         currentColor = oxygenGradient.Evaluate(oxygenNormalized);

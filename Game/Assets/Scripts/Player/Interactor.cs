@@ -41,14 +41,20 @@ void Update()
     {
         Debug.Log("cInt " + currentInteractable);
         DetectInteractable();
-        if (currentInteractable != null && Input.GetKey(KeyCode.E))
+
+
+        if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
         {
             if (currentInteractable is IShowPrompt prompt)
                 prompt.HidePrompt();
             if (currentInteractable is IDestroyable obj)
                 obj.Destroy();
+            if (currentInteractable is IMovable objMove)
+                objMove.MoveMe();
             currentInteractable.Interact(gameObject);
-            currentInteractable = null;
+
+            if (currentInteractable is IShowPrompt updatedPrompt)
+                updatedPrompt.ShowPrompt();
         }
 
 

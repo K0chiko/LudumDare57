@@ -18,11 +18,7 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void Interact(GameObject interactor)
     {
@@ -37,8 +33,7 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
             {
                 _promptInstance = Instantiate(pressEPrefab, canvas.transform);
                 TextMeshProUGUI tmp = _promptInstance.GetComponentInChildren<TextMeshProUGUI>();
-                tmp.text = promptData.promptText[0];
-            
+                tmp.text = promptData.promptText[0];       
             }
             else
             {
