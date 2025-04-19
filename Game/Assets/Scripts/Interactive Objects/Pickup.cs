@@ -24,6 +24,11 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
     {
 
     }
+
+    public bool CanShowPrompt()
+    {
+        return true;
+    }
     public void ShowPrompt()
     {
         if (_promptInstance == null)

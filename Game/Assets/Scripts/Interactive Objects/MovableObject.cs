@@ -14,6 +14,11 @@ public class MovableObject : MonoBehaviour, IInteractable, IMovable, IShowPrompt
         _isDrag = !_isDrag;
         UpdatePromptText();
     }
+
+    public bool CanShowPrompt()
+    {
+        return true;
+    }
     public void SwitchPrompt()
     {
         if (_promptInstance != null && _tmp != null)

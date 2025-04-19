@@ -4,6 +4,5 @@ public interface IShowPrompt
 {
     void ShowPrompt();
     void HidePrompt();
-
-
+    bool CanShowPrompt();
 }
