@@ -14,8 +14,9 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     public ThirdPersonController controller;
     public Inputs inputs;
 
+    public bool isUpgrade = false;
+
     private GameManager _gameManager;
-    public UpgradeManager _upgradeManager;
     private UIController _uiController;
     private GameObject _promptInstance;
 
@@ -43,7 +44,6 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     {
         GameObject gm = GameObject.Find("GameManager");
         _gameManager = gm.GetComponent<GameManager>();
-        _upgradeManager = gm.GetComponent<UpgradeManager>();
 
         _uiController = GameObject.Find("UI").GetComponent<UIController>();
 
@@ -58,7 +58,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         inputs.ApplyCursorState();
         Time.timeScale = 0f;
 
-        _upgradeManager.isUpgrade = true;
+        isUpgrade = true;
         HidePrompt();
 
         _gameManager.saleWindow.SetActive(true);
@@ -70,7 +70,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         sfx.Play();
     }
 
-    public bool CanShowPrompt() => !_upgradeManager.isUpgrade;
+    public bool CanShowPrompt() => !isUpgrade;
 
     public void ShowPrompt()
     {
@@ -105,7 +105,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     public void ButtonResume()
     {
-        _upgradeManager.isUpgrade = false;
+        isUpgrade = false;
         _gameManager.saleWindow.SetActive(false);
         controller.controlEnabled = true;
         inputs.cursorLocked = true;

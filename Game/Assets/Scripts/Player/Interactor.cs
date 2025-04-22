@@ -5,7 +5,7 @@ public class Interactor : MonoBehaviour
     private IInteractable currentInteractable;
     private IInteractable lastInteractable;
 
-    private UpgradeManager _upgradeManager;
+    private Shop _upgradeManager;
 
     private void DetectInteractable()
     {
@@ -37,8 +37,8 @@ public class Interactor : MonoBehaviour
     }
     private void Start()
     {
-        GameObject gm = GameObject.Find("GameManager");
-        _upgradeManager = gm.GetComponent<UpgradeManager>();
+        GameObject gm = GameObject.Find("Rope");
+        _upgradeManager = gm.GetComponent<Shop>();
 
     }
     void Update()
@@ -73,7 +73,7 @@ public class Interactor : MonoBehaviour
             return !bmg.isBreaching;
 
         if (obj is Shop shop)
-            return !shop._upgradeManager.isUpgrade;
+            return !_upgradeManager.isUpgrade;
 
         return true;
     }

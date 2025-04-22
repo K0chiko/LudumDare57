@@ -16,5 +16,5 @@ MonoBehaviour:
   - 'Pickup [E]'
   - 'Drag [E]'
   - 'Breach [E]'
-  - 'Upgade  equipment [E]'
+  - 'Upgrade  equipment [E]'
   altPromptText: 'Release [E]'
