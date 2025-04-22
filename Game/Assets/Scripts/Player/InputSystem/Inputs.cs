@@ -79,7 +79,12 @@ using static UnityEngine.Rendering.DebugUI;
 			SetCursorState(cursorLocked);
 		}
 
-		private void SetCursorState(bool newState)
+		public void ApplyCursorState()
+		{
+			SetCursorState(cursorLocked);
+		}
+
+    private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}

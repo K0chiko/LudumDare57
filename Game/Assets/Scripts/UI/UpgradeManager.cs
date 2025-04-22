@@ -4,7 +4,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public bool isUpgrade = true;
+    public bool isUpgrade = false;
     private GameManager gameManager;
     private UIController uiController;
 

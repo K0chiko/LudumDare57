@@ -5,6 +5,8 @@ public class Interactor : MonoBehaviour
     private IInteractable currentInteractable;
     private IInteractable lastInteractable;
 
+    private UpgradeManager _upgradeManager;
+
     private void DetectInteractable()
     {
         currentInteractable = null;
@@ -22,7 +24,6 @@ public class Interactor : MonoBehaviour
             }
         }
 
-        // Если объект изменился — обновляем подсказку
         if (currentInteractable != lastInteractable)
         {
             if (lastInteractable is IShowPrompt oldPrompt)
@@ -34,7 +35,12 @@ public class Interactor : MonoBehaviour
             lastInteractable = currentInteractable;
         }
     }
+    private void Start()
+    {
+        GameObject gm = GameObject.Find("GameManager");
+        _upgradeManager = gm.GetComponent<UpgradeManager>();
 
+    }
     void Update()
     {
         DetectInteractable();
@@ -65,6 +71,9 @@ public class Interactor : MonoBehaviour
         // Если объект — BreachingMiniGame, не показываем подсказку во время взлома
         if (obj is BreachingMiniGame bmg)
             return !bmg.isBreaching;
+
+        if (obj is Shop shop)
+            return !shop._upgradeManager.isUpgrade;
 
         return true;
     }
