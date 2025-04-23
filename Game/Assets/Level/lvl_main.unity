@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.011764706, g: 0.14509805, b: 0.23921569, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.05
@@ -150045,6 +150045,7 @@ Transform:
   m_Children:
   - {fileID: 2102633720}
   - {fileID: 1064200606}
+  - {fileID: 905114703}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &556285957
@@ -253061,6 +253062,57 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &905114702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905114703}
+  - component: {fileID: 905114704}
+  m_Layer: 0
+  m_Name: VolumtericManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &905114703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905114702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 553661951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905114704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905114702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba10ef85ab51d040aa6f07625d4e454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumetricFogMaterial: {fileID: 2100000, guid: 3f9c0a74086ee8e45b2bdcb8ca4d37ac, type: 2}
+  minTiling: 0.6
+  maxTiling: 1.2
+  tilingSpeed: 1
+  minThreshold: 0.8
+  maxThreshold: 1.2
+  thresholdSpeed: 0.5
 --- !u!1 &905376885
 GameObject:
   m_ObjectHideFlags: 0
@@ -604812,73 +604864,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_NotificationBehavior
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
-      value: 1d8b572f-0931-4645-8a13-f363a4e74494
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
-      value: 4888f36f-6bb2-4136-a377-2e19dda4ed51
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
-      value: 0129a90c-b713-45d0-ae92-8ff40c5b02a2
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
-      value: bfaa3402-2363-4f2d-8562-0220fbc2c216
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
-      value: 'Player/Crouch[/Keyboard/ctrl]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: 'Player/JetPack[/Mouse/leftButton]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: 'Player/Interact[/Keyboard/e]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: Player/Pull
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339774, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: MoveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 549640563784339774, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: CrouchSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2842983513146388696, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: _upgradeManager
-      value: 
-      objectReference: {fileID: 1923775331}
     - target: {fileID: 3974640895553239722, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
       propertyPath: m_Name
       value: Player_pivot
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255593797306813769, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
-      propertyPath: analogMovement
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
