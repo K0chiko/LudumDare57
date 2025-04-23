@@ -14,9 +14,9 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.17034532, g: 0.3283019, b: 0.28193945, a: 1}
-  m_FogMode: 2
+  m_Fog: 1
+  m_FogColor: {r: 0.011764706, g: 0.14509805, b: 0.23921569, a: 1}
+  m_FogMode: 3
   m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
@@ -401436,8 +401436,12 @@ MonoBehaviour:
   volume: {fileID: 2102633719}
   topColor: {r: 0.2016, g: 0.63, b: 0.51576, a: 1}
   bottomColor: {r: 0.06988252, g: 0.08119867, b: 0.24528301, a: 1}
-  topY: 0
+  topY: 10
   bottomY: -40
+  sun: {fileID: 2004804981}
+  topLight: 0.8
+  bottomLight: 0.01
+  sunFallof: 1.8
   liftTop: {x: 1, y: 1.27, z: 1.33}
   liftBottom: {x: 0.1, y: 0.1, z: 0.15}
   gammaTop: {x: 1.08, y: 1.11, z: 1.33}
@@ -566259,10 +566263,10 @@ Light:
   m_GameObject: {fileID: 2004804979}
   m_Enabled: 1
   serializedVersion: 11
-  m_Type: 0
+  m_Type: 1
   m_Color: {r: 0.6373158, g: 0.7660377, b: 0.48419362, a: 1}
-  m_Intensity: 1200
-  m_Range: 62.59
+  m_Intensity: 0.8
+  m_Range: 106.88194
   m_SpotAngle: 108.50033
   m_InnerSpotAngle: 83.28008
   m_CookieSize: 10
@@ -566323,13 +566327,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004804979}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.73149866, y: -0, z: -0, w: 0.6818429}
-  m_LocalPosition: {x: -29.7, y: 47.5, z: 7.8}
+  m_LocalRotation: {x: 0.33827257, y: -0, z: -0, w: 0.94104815}
+  m_LocalPosition: {x: -58.3, y: 30.9, z: -32.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1064200606}
-  m_LocalEulerAnglesHint: {x: 94.02399, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 39.543, y: 0, z: 0}
 --- !u!43 &2005245990
 Mesh:
   m_ObjectHideFlags: 0

@@ -15,6 +15,12 @@ public class EnvLighting : MonoBehaviour
     public float topY = 10f;
     public float bottomY = -10f;
 
+    [Header("Directional Light")]
+    public Light sun;
+    public float topLight = 1f;
+    public float bottomLight = 0.1f;
+    public float sunFallof = 1.5f;
+
     [Header("Lift Start (Top) / End (Bottom)")]
     public Vector3 liftTop = Vector3.one;
     public Vector3 liftBottom = Vector3.zero;
@@ -42,10 +48,10 @@ public class EnvLighting : MonoBehaviour
 
     void Update()
     {
-        //float t = Mathf.InverseLerp(topY, bottomY, player.position.y);
 
         float targetT = Mathf.InverseLerp(topY, bottomY, player.position.y);
         tSmoothed = Mathf.Lerp(tSmoothed, targetT, Time.deltaTime * smoothSpeed);
+        sun.intensity = Mathf.Lerp(topLight, bottomLight, targetT * sunFallof);
 
         // Ambient Light
         RenderSettings.ambientLight = Color.Lerp(topColor, bottomColor, tSmoothed);
