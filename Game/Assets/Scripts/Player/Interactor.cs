@@ -37,7 +37,7 @@ public class Interactor : MonoBehaviour
     }
     private void Start()
     {
-        GameObject gm = GameObject.Find("Rope");
+        GameObject gm = GameObject.Find("Shop");
         _upgradeManager = gm.GetComponent<Shop>();
 
     }

@@ -91,14 +91,6 @@ public class GameManager : MonoBehaviour
             RestartLevel();
         }
 
-/*        if (other.gameObject.CompareTag("Bell"))
-        {
-            Debug.Log(" asdasd ");
-            //rope.GetComponent<RopeToBase>().isRising = false;
-            saleWindow.SetActive(true);
-            upgradeManager.isUpgrade = true;
-            oxygen = oxygenMax;
-        }*/
      }
        
     
