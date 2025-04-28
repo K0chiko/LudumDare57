@@ -83,18 +83,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("Killzone"))
-        {
-            RestartLevel();
-        }
-
-     }
        
     
-
     public void RestartLevel()
     {
         Scene currentScene = SceneManager.GetActiveScene();
