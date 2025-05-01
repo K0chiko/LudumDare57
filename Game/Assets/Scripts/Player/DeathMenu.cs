@@ -7,15 +7,10 @@ public class DeathMenu : PauseManager
 
     public JSONSaveLoad saveSystem;
 
-/*    void Start()
-    {
-        
-    }
-*/
 
     void Update()
     {
-        if (_isDead)
+        if (_isDead || GameManager.Instance.oxygen <= 0)
         {
             ButtonPause();
         }
@@ -30,10 +25,4 @@ public class DeathMenu : PauseManager
         }
     }
 
-    private void DeathMenuOn()
-    {
-        ButtonResume();
-        
-        //saveSystem.LoadGame();
-    }
 }

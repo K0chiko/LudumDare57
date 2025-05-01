@@ -5,6 +5,9 @@ using static Unity.VisualScripting.Member;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance { get; private set; }
+
     [Tooltip("Количество кислорода в баллоне")]
     public float oxygen = 100f;
     [Tooltip("Расход кислорода базовый. Используется даже при отсутствии действий.")]
@@ -39,6 +42,11 @@ public class GameManager : MonoBehaviour
     private int currentClipIndex = 0;
 
     private UIController uiController;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -76,10 +84,10 @@ public class GameManager : MonoBehaviour
 
         OxygenBarColor();
 
-        if (oxygen <= 0)
+  /*      if (oxygen <= 0)
         {
             RestartLevel();
-        }
+        }*/
 
     }
 

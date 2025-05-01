@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseGameMenu;
     public ThirdPersonController controller;
     public Inputs inputs;
-    public virtual void ButtonResume()
+    protected virtual void ButtonResume()
     {
         pauseGameMenu.SetActive(false);
         controller.controlEnabled = true;
@@ -19,7 +19,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public virtual void ButtonPause()
+    protected virtual void ButtonPause()
     {
         controller.controlEnabled = false;
         pauseGameMenu.SetActive(true);
@@ -29,13 +29,13 @@ public class PauseManager : MonoBehaviour
         _isPauseGame = true;
     }
 
-    public virtual void ButtonRestart()
+    protected virtual void ButtonRestart()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene((SceneManager.GetActiveScene().name));
     }
 
-    public virtual void ButtonExit()
+    protected virtual void ButtonExit()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
