@@ -6,6 +6,7 @@ public class OxygenEffects : MonoBehaviour
 {
     private GameManager gameManager; 
     public Volume globalVolume;
+    public Material material;
 
     private Vignette vignette;
 
