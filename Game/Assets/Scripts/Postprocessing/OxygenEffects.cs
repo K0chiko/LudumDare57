@@ -13,46 +13,44 @@ public struct FloatRange
 }
 public class OxygenEffects : MonoBehaviour
 {
-    private GameManager gameManager; 
-    public Volume globalVolume;
     private Material _material;
-
-    public float hue;
-    //public float saturation;
-    //public float value;
+    private GameManager gameManager;
 
     private float _valueFrequency;
     private float _valueAmplitude;
 
-    private Vignette vignette;
+    [Header("Оттенок (Hue)")]
+    [Tooltip("Значение от 0 до 1.")]
+    public float hue;
 
+    [Header("Насыщенность (Saturation)")]
+    [Tooltip("Диапазон насыщенности. Перескакивает с 0,95 до 1,02 так как при 1 эффект невидим.")]
     public FloatRange saturation = new FloatRange { min = 0.9f, max = 1.15f };
+
+    [Header("Яркость (Value)")]
+    [Tooltip("Диапазон яркости. Чем ниже значение, тем темнее материал.")]
     public FloatRange value = new FloatRange { min = 0.2f, max = 0.5f };
+
+    [Header("Амплитуда пульсации")]
+    [Tooltip("Добавляется к Value.")]
     public FloatRange amplitude = new FloatRange { min = 0.1f, max = 0.2f };
-    public FloatRange vignetteRadius = new FloatRange { min = 2.0f, max = 3.5f };
+
+    [Header("Частота пульсации")]
+    [Tooltip("Частота пульсации.")]
     public FloatRange frequency = new FloatRange { min = 2f, max = 5f };
+
+    [Header("Радиус виньетки")]
+    [Tooltip("Значение передаётся в шейдер виньетки.")]
+    public FloatRange vignetteRadius = new FloatRange { min = 2.0f, max = 3.5f };
 
     void Start()
     {
         _material = GetComponent<Renderer>().sharedMaterial;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        /*     if (globalVolume.profile.TryGet(out vignette))
-   {
-       vignette.active = true;
-   }
-   else
-   {
-       Debug.LogWarning("Виньетка не найдена в Global Volume!");
-   }*/
     }
 
     void Update()
     {
-       //if (vignette == null) return;
-
-
-        //float targetIntensity = Mathf.Lerp(maxIntensity, minIntensity, oxygenNormalized);
-        /*   vignette.intensity.Override(targetIntensity);*/
         HSV();
     }
 
@@ -65,7 +63,6 @@ public class OxygenEffects : MonoBehaviour
 
         float pulse = Mathf.Sin(Time.time * _valueFrequency) * _valueAmplitude;
         float oxygenNormalized = gameManager.oxygen / 100f;
-        //float oxygenNormalized = 1;
 
         h = hue;
         s = Mathf.Lerp(saturation.max, saturation.min, oxygenNormalized);
@@ -80,6 +77,5 @@ public class OxygenEffects : MonoBehaviour
         _valueAmplitude = Mathf.Lerp(amplitude.min, amplitude.max, oxygenNormalized);
         _valueFrequency = Mathf.Lerp(frequency.max, frequency.min, oxygenNormalized);
         _material.SetFloat("_VignetteRadius", Mathf.Lerp(vignetteRadius.min, vignetteRadius.max, oxygenNormalized)) ;
-        Debug.Log(s);
     }
 }

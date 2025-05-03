@@ -309999,23 +309999,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e15fa911a0c36f4ba22d49c076558cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalVolume: {fileID: 2102633719}
   hue: 0.45
   saturation:
     min: 0.75
     max: 1.15
   value:
     min: 0.1
-    max: 0.6
+    max: 0.5
   amplitude:
-    min: 0.1
-    max: 0.25
-  vignetteRadius:
-    min: 2
-    max: 4
+    min: 0.05
+    max: 0.1
   frequency:
     min: 2
     max: 5
+  vignetteRadius:
+    min: 2
+    max: 4
 --- !u!1001 &1117297619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605843,11 +605842,11 @@ PrefabInstance:
     - target: {fileID: 3342657536812830140, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: inputs
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 773536782}
     - target: {fileID: 3342657536812830140, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 773536784}
     - target: {fileID: 4957097201583292639, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
