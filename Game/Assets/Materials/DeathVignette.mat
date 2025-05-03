@@ -120,7 +120,7 @@ Material:
     - _Surface: 0
     - _VignetteIntensity: 0.93
     - _VignettePower: 2
-    - _VignetteRadius: 3.9993072
+    - _VignetteRadius: 3.999655
     - _VoronoiScale: 5
     - _VoronoiSpeed: 2
     - _VoronoiTime: 5.39

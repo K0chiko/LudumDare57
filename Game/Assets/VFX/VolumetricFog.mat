@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: VolumetricFog
-  m_Shader: {fileID: 4800000, guid: 5892d3a6d853de348b5d8acb620cee9e, type: 3}
+  m_Shader: {fileID: 4800000, guid: fa927327cbb51cb429f4ee77e6aed07c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -34,11 +34,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DensityMultiplier: 0.12
-    - _DensityThreshold: 0.8532089
+    - _DensityThreshold: 1.1286472
     - _LightScattering: 0.632
     - _MaxDistance: 35
     - _NoiseOffset: 8
-    - _NoiseTiling: 0.6008996
+    - _NoiseTiling: 1.1955031
     - _StepSize: 2
     m_Colors:
     - _Color: {r: 0.014389451, g: 0.16226411, b: 0.13767833, a: 1}

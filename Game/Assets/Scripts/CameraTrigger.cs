@@ -8,11 +8,9 @@ public class CameraTrigger : MonoBehaviour
 
     private CameraController cameraController;
     private float originalZ;
-    private bool inZone;
 
     void Start()
     {
-        inZone = false;
         GameObject cameraObj = Camera.main.gameObject;
         cameraController = cameraObj.GetComponent<CameraController>();
         originalZ = cameraController.cameraAdjustment.z;
@@ -22,7 +20,6 @@ public class CameraTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            inZone = true;
             StopAllCoroutines();
             StartCoroutine(ChangeZSmooth(cameraController.cameraAdjustment.z, targetZ));
         }
@@ -32,7 +29,6 @@ public class CameraTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            inZone = false;
             StopAllCoroutines();
             StartCoroutine(ChangeZSmooth(cameraController.cameraAdjustment.z, originalZ));
         }
