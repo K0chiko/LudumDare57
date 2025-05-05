@@ -100,18 +100,30 @@ namespace StarterAssets
         private bool _hasAnimator;
         public float maxVertSpeed = 1f;
 
-/*        private bool IsCurrentDeviceMouse
-        {
-            get
-            {
-#if ENABLE_INPUT_SYSTEM
-                return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
-				return false;
-#endif
-            }*/
-       // }
+        /*        private bool IsCurrentDeviceMouse
+                {
+                    get
+                    {
+        #if ENABLE_INPUT_SYSTEM
+                        return _playerInput.currentControlScheme == "KeyboardMouse";
+        #else
+                        return false;
+        #endif
+                    }*/
+        // }
 
+
+        public static ThirdPersonController Instance { get; set; }
+
+        void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+        }
 
 
         private void Start()

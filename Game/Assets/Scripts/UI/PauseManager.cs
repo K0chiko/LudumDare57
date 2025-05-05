@@ -7,24 +7,24 @@ public class PauseManager : MonoBehaviour
 
     protected bool _isPauseGame;
     public GameObject pauseGameMenu;
-    public ThirdPersonController controller;
-    public Inputs inputs;
+    //public ThirdPersonController controller;
+    //public Inputs inputs;
     protected virtual void ButtonResume()
     {
         pauseGameMenu.SetActive(false);
-        controller.controlEnabled = true;
-        inputs.cursorLocked = true;
-        inputs.ApplyCursorState();
+        ThirdPersonController.Instance.controlEnabled = true;
+        Inputs.Instance.cursorLocked = true;
+        Inputs.Instance.ApplyCursorState();
         _isPauseGame = false;
         Time.timeScale = 1f;
     }
 
     protected virtual void ButtonPause()
     {
-        controller.controlEnabled = false;
+        ThirdPersonController.Instance.controlEnabled = false;
         pauseGameMenu.SetActive(true);
-        inputs.cursorLocked = false;
-        inputs.ApplyCursorState();
+        Inputs.Instance.cursorLocked = false;
+        Inputs.Instance.ApplyCursorState();
         Time.timeScale = 0f;
         _isPauseGame = true;
     }

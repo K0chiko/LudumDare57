@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6499634827867707048}
   - component: {fileID: 1240260526541503454}
   - component: {fileID: 8194777087798755422}
+  - component: {fileID: 8843316377174439221}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Home
@@ -103,11 +104,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 0.3, z: 20}
+  m_Size: {x: 5, y: 0.3, z: 5}
   m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!114 &8194777087798755422
 MonoBehaviour:
@@ -122,3 +123,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  pressEPrefab: {fileID: 6140488360817770851, guid: 14eeffce569433e43877d19ee238336c, type: 3}
+  promptData: {fileID: 11400000, guid: f65f04a930ed8b243b7f531df8b4a820, type: 2}
+  airTankFillUpClip: {fileID: 8300000, guid: 96355224a2765c384959a703bb88720c, type: 3}
+  controller: {fileID: 0}
+  inputs: {fileID: 0}
+  isUpgrade: 0
+  oxygenTankText: {fileID: 0}
+  jetpackText: {fileID: 0}
+  valueToOxygenTank: 10
+  valueToJetPackConsumption: 5
+  oxygenIncrement: 50
+  jetPackDecrement: 1000
+  oxygenUpgradeUpcost: 20
+  jetPackUpgradeUpcost: 20
+--- !u!114 &8843316377174439221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521781397646497345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f966c6eb14ee7334bbc38ce88d8ca9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

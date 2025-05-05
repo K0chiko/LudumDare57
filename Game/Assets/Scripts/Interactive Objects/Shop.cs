@@ -53,9 +53,9 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     public void Interact(GameObject interactor)
     {
-        controller.controlEnabled = false;
-        inputs.cursorLocked = false;
-        inputs.ApplyCursorState();
+        ThirdPersonController.Instance.controlEnabled = false;
+        Inputs.Instance.cursorLocked = false;
+        Inputs.Instance.ApplyCursorState();
         Time.timeScale = 0f;
 
         isUpgrade = true;
@@ -107,8 +107,9 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     {
         isUpgrade = false;
         _gameManager.saleWindow.SetActive(false);
-        controller.controlEnabled = true;
-        inputs.cursorLocked = true;
+        ThirdPersonController.Instance.controlEnabled = true;
+        Inputs.Instance.cursorLocked = true;
+        Inputs.Instance.ApplyCursorState();
         inputs.ApplyCursorState();
         Time.timeScale = 1f;
     }

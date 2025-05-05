@@ -21,7 +21,7 @@ public class OxygenEffects : MonoBehaviour
 
     [Header("Оттенок (Hue)")]
     [Tooltip("Значение от 0 до 1.")]
-    public float hue;
+    public FloatRange hue = new FloatRange { min = 0.2f, max = 0.45f };
 
     [Header("Насыщенность (Saturation)")]
     [Tooltip("Диапазон насыщенности. Перескакивает с 0,95 до 1,02 так как при 1 эффект невидим.")]
@@ -43,6 +43,14 @@ public class OxygenEffects : MonoBehaviour
     [Tooltip("Значение передаётся в шейдер виньетки.")]
     public FloatRange vignetteRadius = new FloatRange { min = 2.0f, max = 3.5f };
 
+
+    public Renderer[] oxygenIndicator;
+
+    [SerializeField] private Gradient oxygenGradient;
+
+    Color currentColor;
+
+
     void Start()
     {
         _material = GetComponent<Renderer>().sharedMaterial;
@@ -52,6 +60,7 @@ public class OxygenEffects : MonoBehaviour
     void Update()
     {
         HSV();
+        oxygenBarColor();
     }
 
     public void HSV()
@@ -62,13 +71,13 @@ public class OxygenEffects : MonoBehaviour
         Color.RGBToHSV(originalColor, out float h, out float s, out float v);
 
         float pulse = Mathf.Sin(Time.time * _valueFrequency) * _valueAmplitude;
-        float oxygenNormalized = gameManager.oxygen / 100f;
+        float oxygenNormalized = gameManager.oxygen / gameManager.oxygenMax;
 
-        h = hue;
-        s = Mathf.Lerp(saturation.max, saturation.min, oxygenNormalized);
-        if   (s > 0.95f && s < 1.01f) s = 1.02f; // when s = 1 effect is invisible
-        if   (oxygenNormalized > 0.8) v = 0;
-        else v = Mathf.Lerp(value.max, value.min, oxygenNormalized) + pulse;
+        h = Mathf.Lerp(hue.min, hue.max, 1); //Mathf.Sin((oxygenNormalized) * Mathf.PI)
+        s = Mathf.Lerp(saturation.min, saturation.max, Mathf.Pow(1 - oxygenNormalized, 2));
+        //if   (s > 0.92f && s < 1.01f) s = 1.1f; // when s = 1 effect is invisible
+
+        v = Mathf.Lerp(value.min, value.max, Mathf.Pow(1- oxygenNormalized, 2)) + pulse;
 
         Color newColor = Color.HSVToRGB(h, s, v);
 
@@ -77,5 +86,22 @@ public class OxygenEffects : MonoBehaviour
         _valueAmplitude = Mathf.Lerp(amplitude.min, amplitude.max, oxygenNormalized);
         _valueFrequency = Mathf.Lerp(frequency.max, frequency.min, oxygenNormalized);
         _material.SetFloat("_VignetteRadius", Mathf.Lerp(vignetteRadius.min, vignetteRadius.max, oxygenNormalized)) ;
+    }
+
+    private void oxygenBarColor()
+    {
+        float oxygenNormalized = gameManager.oxygen / 100f;
+
+        currentColor = oxygenGradient.Evaluate(oxygenNormalized);
+
+
+        foreach (Renderer oxyGen in oxygenIndicator)
+        {
+            if (oxyGen == null) continue;
+
+            oxyGen.material.color = currentColor;
+            oxyGen.material.EnableKeyword("_EMISSION");
+            oxyGen.material.SetColor("_EmissionColor", currentColor);
+        }
     }
 }
