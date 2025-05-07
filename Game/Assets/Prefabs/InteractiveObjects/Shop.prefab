@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8194777087798755422}
   - component: {fileID: 8843316377174439221}
   m_Layer: 0
-  m_Name: Rope
+  m_Name: Shop
   m_TagString: Home
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
