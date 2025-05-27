@@ -1741,6 +1741,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 8774668065863806515, guid: 5787958e29bcb914ca8232919ef51a48, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5739034891379646028}
+    - target: {fileID: 8774668065863806515, guid: 5787958e29bcb914ca8232919ef51a48, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplyGraphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774668065863806515, guid: 5787958e29bcb914ca8232919ef51a48, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8990259361952122932, guid: 5787958e29bcb914ca8232919ef51a48, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.7
