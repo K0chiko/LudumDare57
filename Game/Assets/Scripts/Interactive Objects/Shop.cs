@@ -13,10 +13,12 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     public AudioClip airTankFillUpClip;
     public ThirdPersonController controller;
     public Inputs inputs;
+    public GameObject saleWindow;
+    public SFXController sfxController;
 
     public bool isUpgrade = false;
 
-    private GameManager _gameManager;
+    private OxygenController _oxygenController;
     private UIController _uiController;
     private GameObject _promptInstance;
 
@@ -43,7 +45,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     private void Start()
     {
         GameObject gm = GameObject.Find("GameManager");
-        _gameManager = gm.GetComponent<GameManager>();
+        _oxygenController = gm.GetComponent<OxygenController>();
 
         _uiController = GameObject.Find("UI").GetComponent<UIController>();
 
@@ -61,8 +63,8 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         isUpgrade = true;
         HidePrompt();
 
-        _gameManager.saleWindow.SetActive(true);
-        _gameManager.oxygen = _gameManager.oxygenMax;
+        saleWindow.SetActive(true);
+        _oxygenController.oxygen = _oxygenController.oxygenMax;
 
         // Play air tank fill-up sound
         AudioSource sfx = player.AddComponent<AudioSource>();
@@ -106,7 +108,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     public void ButtonResume()
     {
         isUpgrade = false;
-        _gameManager.saleWindow.SetActive(false);
+        saleWindow.SetActive(false);
         ThirdPersonController.Instance.controlEnabled = true;
         Inputs.Instance.cursorLocked = true;
         Inputs.Instance.ApplyCursorState();
@@ -114,47 +116,56 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         Time.timeScale = 1f;
     }
 
-    public void ButtonOxygenUpgrade()
+    public bool OxygenUpgrade()
     {
-        if (_gameManager.value >= valueToOxygenTank)
+        if (_oxygenController.value >= valueToOxygenTank)
         {
-            _gameManager.value -= valueToOxygenTank;
+            _oxygenController.value -= valueToOxygenTank;
             valueToOxygenTank += oxygenUpgradeUpcost;
-            _gameManager.oxygenMax += oxygenIncrement;
-            _gameManager.oxygen += oxygenIncrement;
-            _gameManager.oxygen = Mathf.Clamp(_gameManager.oxygen, 0f, _gameManager.oxygenMax);
-            _uiController.textValue.text = "Value: " + _gameManager.value;
+            _oxygenController.oxygenMax += oxygenIncrement;
+            _oxygenController.oxygen += oxygenIncrement;
+            _oxygenController.oxygen = Mathf.Clamp(_oxygenController.oxygen, 0f, _oxygenController.oxygenMax);
+            _uiController.textValue.text = "Value: " + _oxygenController.value;
 
             UpdateOxygenTankText();
 
-            _gameManager.uiSourceSFX.clip = _gameManager.uiAudio[1];
-            _gameManager.uiSourceSFX.Play();
+            return true;
         }
         else
         {
-            _gameManager.uiSourceSFX.clip = _gameManager.uiAudio[0];
-            _gameManager.uiSourceSFX.Play();
+            return false;
         }
     }
-    public void ButtonJetpackUpgrade()
+
+    public void ButtonOxygenUpgrade()
     {
-        if (_gameManager.value >= valueToJetPackConsumption && _gameManager.jetPackOxygenConsuption >= 1000)
+        bool isUpgrade = OxygenUpgrade();
+        sfxController.UpgradeAudio(isUpgrade);
+    }
+
+    public bool JetpackUpgrade()
+    {
+        if (_oxygenController.value >= valueToJetPackConsumption && _oxygenController.jetPackOxygenConsuption >= 1000)
         {
-            _gameManager.value -= valueToJetPackConsumption;
+            _oxygenController.value -= valueToJetPackConsumption;
             valueToJetPackConsumption += jetPackUpgradeUpcost;
-            _gameManager.jetPackOxygenConsuption -= jetPackDecrement;
-            _uiController.textValue.text = "Value: " + _gameManager.value;
+            _oxygenController.jetPackOxygenConsuption -= jetPackDecrement;
+            _uiController.textValue.text = "Value: " + _oxygenController.value;
 
             UpdateJetpackText();
 
-            _gameManager.uiSourceSFX.clip = _gameManager.uiAudio[1];
-            _gameManager.uiSourceSFX.Play();
+            return true;
         }
         else
         {
-            _gameManager.uiSourceSFX.clip = _gameManager.uiAudio[0];
-            _gameManager.uiSourceSFX.Play();
+            return false;
         }
+    }
+
+    public void ButtonJetpackUpgrade()
+    {
+        bool isUpgrade = JetpackUpgrade();
+        sfxController.UpgradeAudio(isUpgrade);
     }
 
 
@@ -163,7 +174,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         oxygenTankText.text =
             "Oxygen Tank\n" +
             $"Cost: <color=yellow>{valueToOxygenTank}</color>\n" +
-            $"Capacity: <color=green>{(int)_gameManager.oxygenMax} → {_gameManager.oxygenMax + oxygenIncrement}</color>";
+            $"Capacity: <color=green>{(int)_oxygenController.oxygenMax} → {_oxygenController.oxygenMax + oxygenIncrement}</color>";
     }
 
     void UpdateJetpackText()
@@ -171,7 +182,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         jetpackText.text =
             "Jetpack\n" +
             $"Cost: <color=yellow>{valueToJetPackConsumption}</color>\n" +
-            $"Oxygen Consumption: <color=green>{(int)_gameManager.jetPackOxygenConsuption} → {_gameManager.jetPackOxygenConsuption - jetPackDecrement}</color>";
+            $"Oxygen Consumption: <color=green>{(int)_oxygenController.jetPackOxygenConsuption} → {_oxygenController.jetPackOxygenConsuption - jetPackDecrement}</color>";
     }
 
 

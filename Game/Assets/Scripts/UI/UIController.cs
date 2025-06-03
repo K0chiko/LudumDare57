@@ -6,10 +6,10 @@ public class UIController : MonoBehaviour
 {
     public TextMeshProUGUI textValue;
 
-    private GameManager _gameManager;
+    private OxygenController _gameManager;
     void Start()
     {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
         textValue = GameObject.Find("Value").GetComponent<TextMeshProUGUI>();
         textValue.text = "Value: " + _gameManager.value;
 

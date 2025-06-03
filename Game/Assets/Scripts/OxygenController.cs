@@ -1,12 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.VisualScripting.Member;
 
-public class GameManager : MonoBehaviour
+
+public class OxygenController : MonoBehaviour
 {
 
-    public static GameManager Instance { get; private set; }
+    public static OxygenController Instance { get; private set; }
 
     [Tooltip("Количество кислорода в баллоне")]
     public float oxygen = 100f;
@@ -22,8 +22,7 @@ public class GameManager : MonoBehaviour
     [Space(50)]
     public Renderer[] oxygenIndicator;
     [Space(10)]
-    public GameObject saleWindow;
-    private GameObject rope;
+
     public int value = 0;
     public int jetPackModifier;
 
@@ -35,11 +34,7 @@ public class GameManager : MonoBehaviour
 
     Color currentColor;
 
-    public AudioSource uiSourceSFX;
-    public AudioClip[] uiAudio;
 
-
-    private int currentClipIndex = 0;
 
     private UIController uiController;
 
@@ -52,11 +47,6 @@ public class GameManager : MonoBehaviour
     {
         uiController = GameObject.Find("UI").GetComponent<UIController>();
         oxygenMax = oxygen;
-
-
-        rope = GameObject.Find("Rope");
-
-        uiSourceSFX.clip = uiAudio[currentClipIndex];
     }
 
     // Update is called once per frame
@@ -83,12 +73,6 @@ public class GameManager : MonoBehaviour
         oxygenNormalized = oxygen / oxygenMax;
 
         OxygenBarColor();
-
-  /*      if (oxygen <= 0)
-        {
-            RestartLevel();
-        }*/
-
     }
 
        

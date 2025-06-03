@@ -265747,9 +265747,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 773536784}
     - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
+      propertyPath: saleWindow
+      value: 
+      objectReference: {fileID: 2669962915299371202}
+    - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
       propertyPath: jetpackText
       value: 
       objectReference: {fileID: 650835337}
+    - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
+      propertyPath: sfxController
+      value: 
+      objectReference: {fileID: 6214504947644716935}
     - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
       propertyPath: oxygenTankText
       value: 
@@ -265759,6 +265767,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
+--- !u!1 &940905449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2521781397646497345, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
+  m_PrefabInstance: {fileID: 940905448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &940942591
 Mesh:
   m_ObjectHideFlags: 0
@@ -401657,7 +401670,6 @@ MonoBehaviour:
   jetPackOxygenConsuption: 10000
   oxygenIndicator:
   - {fileID: 0}
-  saleWindow: {fileID: 2669962915299371202}
   value: 0
   jetPackModifier: 0
   oxygenGradient:
@@ -401691,10 +401703,6 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   oxygenMax: 100
-  uiSourceSFX: {fileID: 1567267793765112904}
-  uiAudio:
-  - {fileID: 8300000, guid: 0cea4bcbfb8bcc7428e7222d92701faa, type: 3}
-  - {fileID: 8300000, guid: 4f77acec7c13b0b429588d7c2e82c0bf, type: 3}
 --- !u!4 &1459080131
 Transform:
   m_ObjectHideFlags: 0
@@ -423088,6 +423096,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2842983513146388696, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
+      propertyPath: _shopMenu
+      value: 
+      objectReference: {fileID: 1923775331}
     - target: {fileID: 3974640895553239722, guid: 171d6847d9a28fc44a35e1d93d568ff0, type: 3}
       propertyPath: m_Name
       value: Player_pivot
@@ -542692,7 +542704,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
   m_PrefabInstance: {fileID: 940905448}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 940905449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edd0f69876fb19b44a4bbb43b96dfc65, type: 3}
@@ -605098,8 +605110,9 @@ GameObject:
   - component: {fileID: 5159595360055122766}
   - component: {fileID: 6214504947644716934}
   - component: {fileID: 6214504947644716935}
+  - component: {fileID: 6214504947644716936}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605178,6 +605191,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d4915b6200d8cf279edad0523f14779, type: 3}
   gameManager: {fileID: 1459080130}
   fadeDuration: 1
+  shop: {fileID: 940905449}
+  uiSourceSFX: {fileID: 1567267793765112904}
+  uiAudio:
+  - {fileID: 8300000, guid: 0cea4bcbfb8bcc7428e7222d92701faa, type: 3}
+  - {fileID: 8300000, guid: 4f77acec7c13b0b429588d7c2e82c0bf, type: 3}
+--- !u!114 &6214504947644716936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227125514888365764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704db75f90cb14a49b5042535d8eef79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6381613730745069461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605186,6 +605216,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: musicAudioSource
+      value: 
+      objectReference: {fileID: 2199527377050357781}
+    - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: environmentAudioSource
+      value: 
+      objectReference: {fileID: 7078565155001448185}
     - target: {fileID: 4957097201583292639, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

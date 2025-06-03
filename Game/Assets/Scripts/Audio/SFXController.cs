@@ -1,27 +1,35 @@
 using UnityEngine;
 
-public class SFXManager : MonoBehaviour
+public class SFXController : MonoBehaviour
 {
     public AudioSource sourceA;
     public AudioSource sourceB;
     public AudioClip[] breathingClips;
-    public GameManager gameManager;
+    public OxygenController gameManager;
     public float fadeDuration = 1f;
 
+    [Tooltip("Чтобы брать состояние кнопок")]
+    public GameObject shop;
 
+    public AudioSource uiSourceSFX;
+    public AudioClip[] uiAudio;
 
-    private int currentClipIndex = -1;
+    private int currentClipIndex = 0;
+
+   // private int currentClipIndex = -1;
     private bool isSourceAActive = true;
     //private float fadeTimer = 0f;
 
     void Start()
     {
-        float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / 100f);
+        float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / gameManager.oxygenMax);
         currentClipIndex = GetClipIndex(oxygenNormalized);
         sourceA.clip = breathingClips[currentClipIndex];
         sourceA.volume = 1f;
         sourceA.Play();
         sourceB.volume = 0f;
+
+        uiSourceSFX.clip = uiAudio[currentClipIndex];
     }
 
     void Update()
@@ -34,8 +42,22 @@ public class SFXManager : MonoBehaviour
             currentClipIndex = newClipIndex;
             StartCoroutine(CrossfadeTo(breathingClips[currentClipIndex]));
         }
+
     }
 
+    #region ShopAudio
+    public void UpgradeAudio(bool isUpgrade)
+    {
+        //uiSourceSFX.clip = uiAudio[1];
+        //uiSourceSFX.Play();
+
+        uiSourceSFX.clip = uiAudio[isUpgrade ? 1 : 0];
+        uiSourceSFX.Play();
+    }
+
+    #endregion
+
+    #region Fading
     int GetClipIndex(float oxygenNormalized)
     {
         if (oxygenNormalized <= 0.05) {
@@ -68,6 +90,7 @@ public class SFXManager : MonoBehaviour
         fromSource.Stop();
         toSource.volume = 1f;
     }
+    #endregion
 }
 
 

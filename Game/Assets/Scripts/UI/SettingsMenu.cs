@@ -15,15 +15,30 @@ public class SettingsMenu : MonoBehaviour
     public GameObject mainMenuButtons;
     public GameObject optionsMenu;
 
+    public Slider sliderAudioGeneral;
+    public SFXController sfx;
+    public Slider sliderAudioEnv;
+    public AudioSource environmentAudioSource;
+    public Slider sliderAudioMusic;
+    public AudioSource musicAudioSource;
+
     private void Start()
     {
         Screen.SetResolution(resolutions[1].horizontal, resolutions[1].vertical, true);
+        sfx = FindFirstObjectByType<SFXController>();
     }
 
     public void ApplyGraphics()
     {
         Screen.SetResolution(resolutions[_selectedResolution].horizontal, resolutions[_selectedResolution].vertical, true);
+
+        SetGeneralVolume();
+        SetMusicVolume();
+        SetEnvVolume();
     }
+
+
+    #region Graphics
 
     [System.Serializable]
     public class ResItem
@@ -58,15 +73,30 @@ public class SettingsMenu : MonoBehaviour
         resolutionLabel.text = resolutions[_selectedResolution].horizontal.ToString() + " x " + resolutions[_selectedResolution].vertical.ToString();
     }
 
-    public void backButton()
+    public void BackButton()
     {
         title.SetActive(true);
         mainMenuButtons.SetActive(true);
         optionsMenu.SetActive(false);
     }
 
-    public void SetVolume(float volume)
+    #endregion
+
+    #region Audio
+    public void SetGeneralVolume()
     {
-        // audioMixer.SetFloat("general", Mathf.Log10(volume - 80) * 20);
+        sfx.sourceA.volume = sliderAudioGeneral.value;
+        sfx.sourceB.volume = sliderAudioGeneral.value;
     }
+
+    public void SetMusicVolume()
+    {
+        musicAudioSource.volume = sliderAudioMusic.value;
+    }
+
+    public void SetEnvVolume()
+    {
+        environmentAudioSource.volume = sliderAudioEnv.value;
+    }
+    #endregion
 }

@@ -10,12 +10,12 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
     public GameObject pressEPrefab;
     public PressEPrompts promptData;
     private GameObject _promptInstance;
-    private GameManager _gameManager;
+    private OxygenController _gameManager;
     private UIController _uiController;
     void Start()
     {
         _uiController = GameObject.Find("UI").GetComponent<UIController>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
     }
 
 

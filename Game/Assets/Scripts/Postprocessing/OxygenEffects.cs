@@ -14,7 +14,7 @@ public struct FloatRange
 public class OxygenEffects : MonoBehaviour
 {
     private Material _material;
-    private GameManager gameManager;
+    private OxygenController gameManager;
 
     private float _valueFrequency;
     private float _valueAmplitude;
@@ -54,13 +54,13 @@ public class OxygenEffects : MonoBehaviour
     void Start()
     {
         _material = GetComponent<Renderer>().sharedMaterial;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
     }
 
     void Update()
     {
         HSV();
-        oxygenBarColor();
+        OxygenBarColor();
     }
 
     public void HSV()
@@ -88,7 +88,7 @@ public class OxygenEffects : MonoBehaviour
         _material.SetFloat("_VignetteRadius", Mathf.Lerp(vignetteRadius.min, vignetteRadius.max, oxygenNormalized)) ;
     }
 
-    private void oxygenBarColor()
+    private void OxygenBarColor()
     {
         float oxygenNormalized = gameManager.oxygen / 100f;
 

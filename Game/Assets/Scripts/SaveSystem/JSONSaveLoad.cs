@@ -14,7 +14,7 @@ public class JSONSaveLoad : MonoBehaviour
     PlayerData playerData;
     string saveFilePath;
 
-    public GameManager gameManager;
+    public OxygenController gameManager;
     private UIController _uiController;
     public GameObject player;
     public Shop shop;

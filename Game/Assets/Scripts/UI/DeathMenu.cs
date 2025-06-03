@@ -8,7 +8,7 @@ public class DeathMenu : PauseManager
     {
         if (!_isPauseGame)
         {
-            if (KillzoneCheck.Instance.isDead || GameManager.Instance.oxygen <= 0)
+            if (KillzoneCheck.Instance.isDead || OxygenController.Instance.oxygen <= 0)
             {
                 ButtonPause();
             }
