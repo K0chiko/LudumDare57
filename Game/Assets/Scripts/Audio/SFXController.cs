@@ -18,6 +18,8 @@ public class SFXController : MonoBehaviour
 
    // private int currentClipIndex = -1;
     private bool isSourceAActive = true;
+    private float sfxVolume;
+
     //private float fadeTimer = 0f;
 
     void Start()
@@ -29,6 +31,7 @@ public class SFXController : MonoBehaviour
         sourceA.Play();
         sourceB.volume = 0f;
 
+        uiSourceSFX.volume = sfxVolume;
         uiSourceSFX.clip = uiAudio[currentClipIndex];
     }
 
@@ -42,15 +45,19 @@ public class SFXController : MonoBehaviour
             currentClipIndex = newClipIndex;
             StartCoroutine(CrossfadeTo(breathingClips[currentClipIndex]));
         }
-
+  
     }
+
+    public void ChangeVolume(float sfxVolume)
+    {
+        uiSourceSFX.volume = sfxVolume / 100f;
+        Debug.Log(uiSourceSFX.volume);
+    }
+
 
     #region ShopAudio
     public void UpgradeAudio(bool isUpgrade)
     {
-        //uiSourceSFX.clip = uiAudio[1];
-        //uiSourceSFX.Play();
-
         uiSourceSFX.clip = uiAudio[isUpgrade ? 1 : 0];
         uiSourceSFX.Play();
     }

@@ -22,19 +22,23 @@ public class SettingsMenu : MonoBehaviour
     public Slider sliderAudioMusic;
     public AudioSource musicAudioSource;
 
+    //public SFXController sfx;
+
     private void Start()
     {
         Screen.SetResolution(resolutions[1].horizontal, resolutions[1].vertical, true);
         sfx = FindFirstObjectByType<SFXController>();
     }
 
-    public void ApplyGraphics()
+    public void ApplySettings()
     {
         Screen.SetResolution(resolutions[_selectedResolution].horizontal, resolutions[_selectedResolution].vertical, true);
 
         SetGeneralVolume();
         SetMusicVolume();
         SetEnvVolume();
+        Debug.Log(sliderAudioEnv.value);
+        sfx.ChangeVolume(sliderAudioEnv.value);
     }
 
 

@@ -605217,6 +605217,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 6214504947644716935}
+    - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: musicAudioSource
       value: 
       objectReference: {fileID: 2199527377050357781}
@@ -605324,6 +605328,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 704891294}
+    - target: {fileID: 9188879805279160317, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplySettings
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
