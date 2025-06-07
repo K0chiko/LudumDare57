@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerData
@@ -21,10 +22,14 @@ public class JSONSaveLoad : MonoBehaviour
 
     void Start()
     {
-        playerData = new PlayerData();
-        playerData.value = gameManager.value;
-        playerData.oxygen = gameManager.oxygen;
-        playerData.position = player.transform.position ;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            playerData = new PlayerData();
+            playerData.value = gameManager.value;
+            playerData.oxygen = gameManager.oxygen;
+            playerData.position = player.transform.position;
+        }
+
 
         saveFilePath = Application.persistentDataPath + "/PlayerData.json";
 
@@ -33,14 +38,14 @@ public class JSONSaveLoad : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+/*        if (Input.GetKeyDown(KeyCode.V))
             SaveGame();
 
         if (Input.GetKeyDown(KeyCode.L))
             LoadGame();
 
         if (Input.GetKeyDown(KeyCode.O))
-            DeleteSaveFile();
+            DeleteSaveFile();*/
     }
 
     public void SaveGame()

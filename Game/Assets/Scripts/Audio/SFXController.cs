@@ -1,51 +1,73 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SFXController : MonoBehaviour
 {
-    public AudioSource sourceA;
-    public AudioSource sourceB;
+    [Header("Ссылки на игровые сущности")]
+    public AudioSource breatheSourceA;
+    public AudioSource breatheSourceB;
     public AudioClip[] breathingClips;
-    public OxygenController gameManager;
-    public float fadeDuration = 1f;
-
-    [Tooltip("Чтобы брать состояние кнопок")]
-    public GameObject shop;
-
+    public OxygenController oxygenController;
     public AudioSource uiSourceSFX;
     public AudioClip[] uiAudio;
+    [Tooltip("Чтобы брать состояние кнопок")]
+    public GameObject shop;
+    [Tooltip("Файл настроек")]
+    public JSONSettingsData settingsData;
+
+    [Space]
+    [Header("Длительность затухания дыхания")]
+    public float fadeDuration = 1f;
 
     private int currentClipIndex = 0;
 
    // private int currentClipIndex = -1;
     private bool isSourceAActive = true;
+    private float generalVolume;
+    private float musicVolume;
+    private float environmentVolume;
     private float sfxVolume;
 
     //private float fadeTimer = 0f;
 
     void Start()
     {
-        float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / gameManager.oxygenMax);
-        currentClipIndex = GetClipIndex(oxygenNormalized);
-        sourceA.clip = breathingClips[currentClipIndex];
-        sourceA.volume = 1f;
-        sourceA.Play();
-        sourceB.volume = 0f;
+        generalVolume = settingsData.settingsMenu.generalVolume;
+        musicVolume = settingsData.settingsMenu.musicVolume;
+        environmentVolume = settingsData.settingsMenu.environmentVolume;
+        sfxVolume = settingsData.settingsMenu.sfxVolume;
 
-        uiSourceSFX.volume = sfxVolume;
-        uiSourceSFX.clip = uiAudio[currentClipIndex];
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            float oxygenNormalized = Mathf.Clamp01(oxygenController.oxygen / oxygenController.oxygenMax);
+            currentClipIndex = GetClipIndex(oxygenNormalized);
+            breatheSourceA.clip = breathingClips[currentClipIndex];
+            breatheSourceA.volume = generalVolume * sfxVolume;
+            breatheSourceA.Play();
+            breatheSourceB.volume = 0f;
+
+            uiSourceSFX.volume = sfxVolume * generalVolume;
+            uiSourceSFX.clip = uiAudio[currentClipIndex];
+        }
+
+
+
     }
 
     void Update()
     {
-        float oxygenNormalized = Mathf.Clamp01(gameManager.oxygen / 100f);
-        int newClipIndex = GetClipIndex(oxygenNormalized);
-
-        if (newClipIndex != currentClipIndex)
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            currentClipIndex = newClipIndex;
-            StartCoroutine(CrossfadeTo(breathingClips[currentClipIndex]));
+            float oxygenNormalized = Mathf.Clamp01(oxygenController.oxygen / 100f);
+            int newClipIndex = GetClipIndex(oxygenNormalized);
+
+            if (newClipIndex != currentClipIndex)
+            {
+                currentClipIndex = newClipIndex;
+                StartCoroutine(CrossfadeTo(breathingClips[currentClipIndex]));
+            }
         }
-  
+         
     }
 
     public void ChangeVolume(float sfxVolume)
@@ -75,8 +97,8 @@ public class SFXController : MonoBehaviour
 
     System.Collections.IEnumerator CrossfadeTo(AudioClip newClip)
     {
-        AudioSource fromSource = isSourceAActive ? sourceA : sourceB;
-        AudioSource toSource = isSourceAActive ? sourceB : sourceA;
+        AudioSource fromSource = isSourceAActive ? breatheSourceA : breatheSourceB;
+        AudioSource toSource = isSourceAActive ? breatheSourceB : breatheSourceA;
         isSourceAActive = !isSourceAActive;
 
         toSource.clip = newClip;
@@ -87,15 +109,15 @@ public class SFXController : MonoBehaviour
         while (time < fadeDuration)
         {
             float t = time / fadeDuration;
-            fromSource.volume = Mathf.Lerp(1f, 0f, t);
-            toSource.volume = Mathf.Lerp(0f, 1f, t);
+            fromSource.volume = Mathf.Lerp(generalVolume * sfxVolume, 0f, t);
+            toSource.volume = Mathf.Lerp(0f, generalVolume * sfxVolume, t);
             time += Time.deltaTime;
             yield return null;
         }
 
         fromSource.volume = 0f;
         fromSource.Stop();
-        toSource.volume = 1f;
+        toSource.volume = generalVolume * sfxVolume;
     }
     #endregion
 }

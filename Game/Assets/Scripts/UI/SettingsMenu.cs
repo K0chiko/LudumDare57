@@ -7,20 +7,32 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     public List<ResItem> resolutions = new List<ResItem>();
-    private int _selectedResolution;
+    public int selectedResolution;
 
     public TMP_Text resolutionLabel;
 
+    [Space]
     public GameObject title;
     public GameObject mainMenuButtons;
     public GameObject optionsMenu;
 
+    [Space]
     public Slider sliderAudioGeneral;
+    public Slider sliderAudioSFX;
     public SFXController sfx;
     public Slider sliderAudioEnv;
     public AudioSource environmentAudioSource;
     public Slider sliderAudioMusic;
     public AudioSource musicAudioSource;
+
+
+    [Tooltip("Файл настроек")]
+    public JSONSettingsData settingsData;
+
+    public float generalVolume;
+    public float musicVolume;
+    public float environmentVolume;
+    public float sfxVolume;
 
     //public SFXController sfx;
 
@@ -32,7 +44,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplySettings()
     {
-        Screen.SetResolution(resolutions[_selectedResolution].horizontal, resolutions[_selectedResolution].vertical, true);
+        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, true);
 
         SetGeneralVolume();
         SetMusicVolume();
@@ -52,10 +64,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void ResLeft()
     {
-        _selectedResolution --;
-        if (_selectedResolution < 0)
+        selectedResolution --;
+        if (selectedResolution < 0)
         {
-            _selectedResolution = 0;
+            selectedResolution = 0;              // взять эту хрень чтобы использовать в JSON
         }
 
         UpdateResolutionLabel();
@@ -63,10 +75,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void ResRight()
     {
-        _selectedResolution++;
-        if (_selectedResolution > resolutions.Count - 1)
+        selectedResolution++;
+        if (selectedResolution > resolutions.Count - 1)
         {
-            _selectedResolution = resolutions.Count - 1;
+            selectedResolution = resolutions.Count - 1;
         }
 
         UpdateResolutionLabel();
@@ -74,7 +86,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void UpdateResolutionLabel()
     {
-        resolutionLabel.text = resolutions[_selectedResolution].horizontal.ToString() + " x " + resolutions[_selectedResolution].vertical.ToString();
+        resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " x " + resolutions[selectedResolution].vertical.ToString();
     }
 
     public void BackButton()
@@ -89,18 +101,34 @@ public class SettingsMenu : MonoBehaviour
     #region Audio
     public void SetGeneralVolume()
     {
-        sfx.sourceA.volume = sliderAudioGeneral.value;
-        sfx.sourceB.volume = sliderAudioGeneral.value;
+        settingsData.settingsMenu.generalVolume = sliderAudioGeneral.value;
+        settingsData.SaveSettings();
+        /*sfx.breatheSourceA.volume = sliderAudioGeneral.value;
+        sfx.breatheSourceB.volume = sliderAudioGeneral.value;*/
     }
 
     public void SetMusicVolume()
     {
-        musicAudioSource.volume = sliderAudioMusic.value;
+        settingsData.settingsMenu.musicVolume = sliderAudioMusic.value;
+        settingsData.SaveSettings();
+        //musicVolume = settingsData.settingsMenu.musicVolume;
+        //musicAudioSource.volume = sliderAudioMusic.value;
     }
 
     public void SetEnvVolume()
     {
-        environmentAudioSource.volume = sliderAudioEnv.value;
+        settingsData.settingsMenu.environmentVolume = sliderAudioEnv.value;
+        settingsData.SaveSettings();
+        //environmentVolume = settingsData.settingsMenu.environmentVolume;
+        //environmentAudioSource.volume = sliderAudioEnv.value;
+    }
+
+    public void SetEffectsVolume()
+    {
+        settingsData.settingsMenu.sfxVolume = sliderAudioSFX.value;
+        settingsData.SaveSettings();
+        //sfxVolume = settingsData.settingsMenu.sfxVolume;
+        //environmentAudioSource.volume = sliderAudioEnv.value;
     }
     #endregion
 }
