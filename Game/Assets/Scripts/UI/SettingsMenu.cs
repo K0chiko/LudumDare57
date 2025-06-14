@@ -48,7 +48,7 @@ public class SettingsMenu : MonoBehaviour
         SoundManager.PlaySound(SoundType.BUTTONCLICK);
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, true);
 
-
+        SetGeneralVolume();
         SetMusicVolume();
         SetEnvVolume();
         SetEffectsVolume();
