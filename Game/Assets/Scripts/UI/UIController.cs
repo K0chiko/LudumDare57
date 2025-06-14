@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     private OxygenController _gameManager;
     void Start()
     {
-        _gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
+        _gameManager = GameObject.Find("Oxygen&saveloadController").GetComponent<OxygenController>();
         textValue = GameObject.Find("Value").GetComponent<TextMeshProUGUI>();
         textValue.text = "Value: " + _gameManager.value;
 

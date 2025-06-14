@@ -253173,7 +253173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba10ef85ab51d040aa6f07625d4e454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumetricFogMaterial: {fileID: 2100000, guid: 3f9c0a74086ee8e45b2bdcb8ca4d37ac, type: 2}
+  volumetricFogMaterial: {fileID: 0}
   minTiling: 0.6
   maxTiling: 1.2
   tilingSpeed: 1
@@ -265732,21 +265732,17 @@ PrefabInstance:
     - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
       propertyPath: sfxController
       value: 
-      objectReference: {fileID: 6214504947644716935}
+      objectReference: {fileID: 6214504947644716937}
     - target: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
       propertyPath: oxygenTankText
       value: 
       objectReference: {fileID: 1689179437}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8843316377174439221, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
---- !u!1 &940905449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2521781397646497345, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
-  m_PrefabInstance: {fileID: 940905448}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &940942591
 Mesh:
   m_ObjectHideFlags: 0
@@ -542446,7 +542442,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8194777087798755422, guid: e2ed73c38833aaf4e87908d063e70246, type: 3}
   m_PrefabInstance: {fileID: 940905448}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940905449}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edd0f69876fb19b44a4bbb43b96dfc65, type: 3}
@@ -604057,7 +604053,7 @@ AudioSource:
   m_GameObject: {fileID: 5957362654148716501}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6965014792202714015, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -604228,11 +604224,11 @@ AudioSource:
   m_GameObject: {fileID: 2505914585415003982}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6965014792202714015, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -604325,7 +604321,7 @@ AudioSource:
   m_GameObject: {fileID: 6178200818642192216}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6965014792202714015, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -604422,7 +604418,7 @@ AudioSource:
   m_GameObject: {fileID: 836409911807260492}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -9048269253844307244, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
   m_audioClip: {fileID: 8300000, guid: d4ecb7ec70192a644a0abfd4dcbb6f5e, type: 3}
   m_Resource: {fileID: 8300000, guid: d4ecb7ec70192a644a0abfd4dcbb6f5e, type: 3}
   m_PlayOnAwake: 1
@@ -604612,7 +604608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 740724902590036708, guid: 0125b4964909daa47a106c84e90e0bc8, type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: Oxygen&saveloadController
       objectReference: {fileID: 0}
     - target: {fileID: 1918838224253226355, guid: 0125b4964909daa47a106c84e90e0bc8, type: 3}
       propertyPath: settingsMenu
@@ -604936,8 +604932,9 @@ GameObject:
   - component: {fileID: 3972152068068349206}
   - component: {fileID: 5159595360055122766}
   - component: {fileID: 6214504947644716934}
-  - component: {fileID: 6214504947644716935}
-  - component: {fileID: 6214504947644716936}
+  - component: {fileID: 6214504947644716937}
+  - component: {fileID: 6214504947644716939}
+  - component: {fileID: 6214504947644716938}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -604996,7 +604993,7 @@ MonoBehaviour:
   rotateY: 0
   rotateZ: 0
   closeDivider: 3
---- !u!114 &6214504947644716935
+--- !u!114 &6214504947644716937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -605005,26 +605002,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5227125514888365764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b190f185f044dc41bc42838e1bec89d, type: 3}
+  m_Script: {fileID: 11500000, guid: 36832c349b295154d8dd5150bf446cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   breatheSourceA: {fileID: 84693314710119553}
   breatheSourceB: {fileID: 1932696341914094192}
-  breathingClips:
-  - {fileID: 8300000, guid: 65a70994c7e2a6ec79c3c015674d8f3f, type: 3}
-  - {fileID: 8300000, guid: 5924079390296f6a48ce82693d1c643a, type: 3}
-  - {fileID: 8300000, guid: 4cb59981404edea0191647bd57b69ae4, type: 3}
-  - {fileID: 8300000, guid: f1e5c3c98544499f29ac491869be3648, type: 3}
-  - {fileID: 8300000, guid: 9d4915b6200d8cf279edad0523f14779, type: 3}
   oxygenController: {fileID: 1459080130}
-  uiSourceSFX: {fileID: 1567267793765112904}
-  uiAudio:
-  - {fileID: 8300000, guid: 0cea4bcbfb8bcc7428e7222d92701faa, type: 3}
-  - {fileID: 8300000, guid: 4f77acec7c13b0b429588d7c2e82c0bf, type: 3}
-  shop: {fileID: 940905449}
-  settingsData: {fileID: 704891295}
+  settingsMenu: {fileID: 1453137465}
   fadeDuration: 1
---- !u!114 &6214504947644716936
+--- !u!114 &6214504947644716938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -605033,9 +605019,129 @@ MonoBehaviour:
   m_GameObject: {fileID: 5227125514888365764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704db75f90cb14a49b5042535d8eef79, type: 3}
+  m_Script: {fileID: 11500000, guid: 15c5333e5e4471b4b8d70f8842870733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundList:
+  - name: Error
+    sounds:
+    - {fileID: 8300000, guid: 0cea4bcbfb8bcc7428e7222d92701faa, type: 3}
+  - name: Success
+    sounds:
+    - {fileID: 8300000, guid: 4f77acec7c13b0b429588d7c2e82c0bf, type: 3}
+  - name: Air Fill-Up
+    sounds:
+    - {fileID: 8300000, guid: 96355224a2765c384959a703bb88720c, type: 3}
+  - name: Pickup
+    sounds:
+    - {fileID: 8300000, guid: b1e3059e587133d47826f3b396ad8462, type: 3}
+  - name: ButtonClick
+    sounds:
+    - {fileID: 8300000, guid: 42037c0c6431437a7a54a5db9b212eb4, type: 3}
+  - name: Breath
+    sounds:
+    - {fileID: 8300000, guid: 65a70994c7e2a6ec79c3c015674d8f3f, type: 3}
+    - {fileID: 8300000, guid: 5924079390296f6a48ce82693d1c643a, type: 3}
+    - {fileID: 8300000, guid: 4cb59981404edea0191647bd57b69ae4, type: 3}
+    - {fileID: 8300000, guid: f1e5c3c98544499f29ac491869be3648, type: 3}
+    - {fileID: 8300000, guid: 9d4915b6200d8cf279edad0523f14779, type: 3}
+--- !u!82 &6214504947644716939
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227125514888365764}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &6381613730745069461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605047,7 +605153,11 @@ PrefabInstance:
     - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 6214504947644716935}
+      objectReference: {fileID: 0}
+    - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
     - target: {fileID: 51774991499005233, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: settingsData
       value: 
@@ -605068,10 +605178,42 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1923775331}
+    - target: {fileID: 5132928619258551426, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132928619258551426, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132928619258551426, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132928619258551426, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5714297121814169175, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: settingsData
       value: 
       objectReference: {fileID: 704891295}
+    - target: {fileID: 5935384289919549392, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935384289919549392, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935384289919549392, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935384289919549392, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6007509366305098145, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: m_Name
       value: UI
@@ -605156,10 +605298,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6674251567387624969, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674251567387624969, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674251567387624969, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674251567387624969, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7155220773050725559, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: saveSystem
       value: 
       objectReference: {fileID: 704891294}
+    - target: {fileID: 7415719682482828171, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415719682482828171, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415719682482828171, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415719682482828171, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7877236313240982060, guid: 84258c4dedd2f074f978ce65d2627538, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -605250,7 +605424,7 @@ AudioSource:
   m_GameObject: {fileID: 8918651268890219109}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3332669264645830968, guid: 0d6f912fa536da94da98da9b44387d53, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9fd526f9c62af064d95c9860cec6eaea, type: 3}
   m_Resource: {fileID: 8300000, guid: 9fd526f9c62af064d95c9860cec6eaea, type: 3}
   m_PlayOnAwake: 1

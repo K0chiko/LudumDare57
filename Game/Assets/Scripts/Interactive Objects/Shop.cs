@@ -10,11 +10,12 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     public GameObject player;
     public GameObject pressEPrefab;
     public PressEPrompts promptData;
-    public AudioClip airTankFillUpClip;
     public ThirdPersonController controller;
     public Inputs inputs;
     public GameObject saleWindow;
-    public SFXController sfxController;
+    public BreathAudioController sfxController;
+
+    [Space]
 
     public bool isUpgrade = false;
 
@@ -44,7 +45,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     private void Start()
     {
-        GameObject gm = GameObject.Find("GameManager");
+        GameObject gm = GameObject.Find("Oxygen&saveloadController");
         _oxygenController = gm.GetComponent<OxygenController>();
 
         _uiController = GameObject.Find("UI").GetComponent<UIController>();
@@ -66,10 +67,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         saleWindow.SetActive(true);
         _oxygenController.oxygen = _oxygenController.oxygenMax;
 
-        // Play air tank fill-up sound
-        AudioSource sfx = player.AddComponent<AudioSource>();
-        sfx.clip = airTankFillUpClip;
-        sfx.Play();
+        SoundManager.PlaySound(SoundType.JETPACK);
     }
 
     public bool CanShowPrompt() => !isUpgrade;
@@ -114,6 +112,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
         Inputs.Instance.ApplyCursorState();
         inputs.ApplyCursorState();
         Time.timeScale = 1f;
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
     }
 
     public bool OxygenUpgrade()

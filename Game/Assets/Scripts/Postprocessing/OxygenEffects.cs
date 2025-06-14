@@ -54,7 +54,7 @@ public class OxygenEffects : MonoBehaviour
     void Start()
     {
         _material = GetComponent<Renderer>().sharedMaterial;
-        gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
+        gameManager = GameObject.Find("Oxygen&saveloadController").GetComponent<OxygenController>();
     }
 
     void Update()

@@ -511561,18 +511561,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5227125514888365764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b190f185f044dc41bc42838e1bec89d, type: 3}
+  m_Script: {fileID: 11500000, guid: 704db75f90cb14a49b5042535d8eef79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breatheSourceA: {fileID: 84693314710119553}
-  breatheSourceB: {fileID: 1932696341914094192}
-  breathingClips: []
-  oxygenController: {fileID: 0}
-  uiSourceSFX: {fileID: 1567267793765112904}
-  uiAudio: []
-  shop: {fileID: 0}
-  settingsData: {fileID: 1978631331}
-  fadeDuration: 1
 --- !u!1001 &5546166041857229249
 PrefabInstance:
   m_ObjectHideFlags: 0

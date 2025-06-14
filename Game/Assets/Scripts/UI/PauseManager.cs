@@ -11,6 +11,7 @@ public class PauseManager : MonoBehaviour
     //public Inputs inputs;
     protected virtual void ButtonResume()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         pauseGameMenu.SetActive(false);
         ThirdPersonController.Instance.controlEnabled = true;
         Inputs.Instance.cursorLocked = true;
@@ -21,6 +22,7 @@ public class PauseManager : MonoBehaviour
 
     protected virtual void ButtonPause()
     {
+        //SoundManager.PlaySound(SoundType.BUTTONCLICK);
         ThirdPersonController.Instance.controlEnabled = false;
         pauseGameMenu.SetActive(true);
         Inputs.Instance.cursorLocked = false;

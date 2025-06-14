@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public SettingsMenu settingsMenu;
     public void StartButton()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -23,21 +24,23 @@ public class MainMenu : MonoBehaviour
         optionsMenu.SetActive(true);
 
         settingsData.LoadSettings();
-        settingsMenu.sliderAudioGeneral.value = settingsMenu.generalVolume;
-        settingsMenu.sliderAudioMusic.value = settingsMenu.musicVolume;
-        settingsMenu.sliderAudioEnv.value = settingsMenu.environmentVolume;
-        settingsMenu.sliderAudioSFX.value = settingsMenu.sfxVolume;
+/*        settingsMenu.sliderAudioGeneral.value = settingsData.generalVolume;
+        settingsMenu.sliderAudioMusic.value = settingsData.musicVolume;
+        settingsMenu.sliderAudioEnv.value = settingsData.environmentVolume;
+        settingsMenu.sliderAudioSFX.value = settingsData.sfxVolume;*/
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
     }
     public void CreditsButton()
     {
-
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
     }
     public void AchievmentsButton()
     {
-
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
     }
     public void ExitButton()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         Debug.Log("Quit!");
         Application.Quit();
     }

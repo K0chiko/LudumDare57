@@ -15,7 +15,7 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
     void Start()
     {
         _uiController = GameObject.Find("UI").GetComponent<UIController>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<OxygenController>();
+        _gameManager = GameObject.Find("Oxygen&saveloadController").GetComponent<OxygenController>();
     }
 
 

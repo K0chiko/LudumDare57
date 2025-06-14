@@ -20,10 +20,18 @@ public class JSONSettingsData : MonoBehaviour
     SettingsData settingsData;
     string saveFilePath;
 
-    public SettingsMenu settingsMenu;
+    public bool isFullscreen;
+    public int  selectedResolution;
+
+    public float generalVolume;
+    public float musicVolume;
+    public float environmentVolume;
+    public float sfxVolume;
+
+    //public SettingsMenu settingsMenu;
     //public Shop shop;
 
-    void Start()
+    void Awake()
     {
         saveFilePath = Application.persistentDataPath + "/SettingsData.json";
 
@@ -52,24 +60,22 @@ public class JSONSettingsData : MonoBehaviour
 
     public void SetDefaultSettings()
     {
-        // Установить дефолтные значения
         settingsData = new SettingsData
         {
-            selectedResolution = 0,  // например, индекс 0
-            generalVolume = 0.8f,
-            musicVolume = 0.6f,
-            environmentVolume = 0.7f,
-            sfxVolume = 0.7f
+            selectedResolution = 0, 
+            generalVolume = 1f,
+            musicVolume = 0.7f,
+            environmentVolume = 70f,
+            sfxVolume = 70f
         };
 
-        // Применить к меню
-        settingsMenu.selectedResolution = settingsData.selectedResolution;
-        settingsMenu.generalVolume = settingsData.generalVolume;
-        settingsMenu.musicVolume = settingsData.musicVolume;
-        settingsMenu.environmentVolume = settingsData.environmentVolume;
-        settingsMenu.sfxVolume = settingsData.sfxVolume;
 
-        // Сразу сохранить файл
+        selectedResolution  = settingsData.selectedResolution;
+        generalVolume       = settingsData.generalVolume;
+        musicVolume         = settingsData.musicVolume;
+        environmentVolume   = settingsData.environmentVolume;
+        sfxVolume           = settingsData.sfxVolume;
+
         SaveSettings();
 
         Debug.Log("Settings file not found. Default settings created and saved.");
@@ -80,11 +86,11 @@ public class JSONSettingsData : MonoBehaviour
         settingsData = new SettingsData();
         //settingsData.difficulty       = settingsMenu.difficulty;
         //settingsData.isFullscreen     = settingsMenu.isFullscreen;
-        settingsData.selectedResolution = settingsMenu.selectedResolution;
-        settingsData.generalVolume      = settingsMenu.generalVolume;
-        settingsData.musicVolume        = settingsMenu.musicVolume;
-        settingsData.environmentVolume  = settingsMenu.environmentVolume;
-        settingsData.sfxVolume          = settingsMenu.sfxVolume;
+        settingsData.selectedResolution = selectedResolution;
+        settingsData.generalVolume      = generalVolume;
+        settingsData.musicVolume        = musicVolume;
+        settingsData.environmentVolume  = environmentVolume;
+        settingsData.sfxVolume          = sfxVolume;
 
         //shop.ButtonResume();
 
@@ -104,11 +110,11 @@ public class JSONSettingsData : MonoBehaviour
             string loadSettingsData = File.ReadAllText(saveFilePath);
             settingsData = JsonUtility.FromJson<SettingsData>(loadSettingsData);
 
-            settingsMenu.selectedResolution = settingsData.selectedResolution;
-            settingsMenu.generalVolume = settingsData.generalVolume;
-            settingsMenu.musicVolume = settingsData.musicVolume;
-            settingsMenu.environmentVolume = settingsData.environmentVolume;
-            settingsMenu.sfxVolume = settingsData.sfxVolume;
+            selectedResolution = settingsData.selectedResolution;
+            generalVolume      = settingsData.generalVolume;
+            musicVolume        = settingsData.musicVolume;
+            environmentVolume  = settingsData.environmentVolume;
+            sfxVolume          = settingsData.sfxVolume;
 
 
             Debug.Log("Load settings complete!: " + saveFilePath);

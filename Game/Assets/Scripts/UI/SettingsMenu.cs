@@ -19,38 +19,40 @@ public class SettingsMenu : MonoBehaviour
     [Space]
     public Slider sliderAudioGeneral;
     public Slider sliderAudioSFX;
-    public SFXController sfx;
     public Slider sliderAudioEnv;
     public AudioSource environmentAudioSource;
     public Slider sliderAudioMusic;
     public AudioSource musicAudioSource;
+    public AudioMixer audioMixer;
 
 
     [Tooltip("Файл настроек")]
     public JSONSettingsData settingsData;
 
-    public float generalVolume;
-    public float musicVolume;
-    public float environmentVolume;
-    public float sfxVolume;
+    [Space]
+    [Tooltip("Для дебага")]
+    private float _generalVolume;
+    private float _musicVolume;
+    private float _environmentVolume;
+    private float _sfxVolume;
 
-    //public SFXController sfx;
 
     private void Start()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         Screen.SetResolution(resolutions[1].horizontal, resolutions[1].vertical, true);
-        sfx = FindFirstObjectByType<SFXController>();
     }
 
     public void ApplySettings()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, true);
 
-        SetGeneralVolume();
+
         SetMusicVolume();
         SetEnvVolume();
-        Debug.Log(sliderAudioEnv.value);
-        sfx.ChangeVolume(sliderAudioEnv.value);
+        SetEffectsVolume();
+
     }
 
 
@@ -64,6 +66,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ResLeft()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         selectedResolution --;
         if (selectedResolution < 0)
         {
@@ -75,6 +78,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ResRight()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         selectedResolution++;
         if (selectedResolution > resolutions.Count - 1)
         {
@@ -91,6 +95,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void BackButton()
     {
+        SoundManager.PlaySound(SoundType.BUTTONCLICK);
         title.SetActive(true);
         mainMenuButtons.SetActive(true);
         optionsMenu.SetActive(false);
@@ -101,32 +106,37 @@ public class SettingsMenu : MonoBehaviour
     #region Audio
     public void SetGeneralVolume()
     {
-        settingsData.settingsMenu.generalVolume = sliderAudioGeneral.value;
+        settingsData.generalVolume = sliderAudioGeneral.value;
         settingsData.SaveSettings();
-        /*sfx.breatheSourceA.volume = sliderAudioGeneral.value;
-        sfx.breatheSourceB.volume = sliderAudioGeneral.value;*/
+        audioMixer.SetFloat("General", Mathf.Log10(settingsData.generalVolume) * 20);
+        //audioMixer.SetFloat("Music", Mathf.Log10(sliderAudioGeneral.value) * 20);
+        /*        sfx.breatheSourceA.volume = sliderAudioGeneral.value;
+                sfx.breatheSourceB.volume = sliderAudioGeneral.value;*/
     }
 
     public void SetMusicVolume()
     {
-        settingsData.settingsMenu.musicVolume = sliderAudioMusic.value;
+        settingsData.musicVolume = sliderAudioMusic.value;
         settingsData.SaveSettings();
+        audioMixer.SetFloat("Music", Mathf.Log10(settingsData.musicVolume) * 20);
         //musicVolume = settingsData.settingsMenu.musicVolume;
         //musicAudioSource.volume = sliderAudioMusic.value;
     }
 
     public void SetEnvVolume()
     {
-        settingsData.settingsMenu.environmentVolume = sliderAudioEnv.value;
+        settingsData.environmentVolume = sliderAudioEnv.value;
         settingsData.SaveSettings();
+        audioMixer.SetFloat("Environment", Mathf.Log10(settingsData.environmentVolume) * 20);
         //environmentVolume = settingsData.settingsMenu.environmentVolume;
         //environmentAudioSource.volume = sliderAudioEnv.value;
     }
 
     public void SetEffectsVolume()
     {
-        settingsData.settingsMenu.sfxVolume = sliderAudioSFX.value;
+        settingsData.sfxVolume = sliderAudioSFX.value;
         settingsData.SaveSettings();
+        audioMixer.SetFloat("Effects", Mathf.Log10(settingsData.sfxVolume) * 20);
         //sfxVolume = settingsData.settingsMenu.sfxVolume;
         //environmentAudioSource.volume = sliderAudioEnv.value;
     }
