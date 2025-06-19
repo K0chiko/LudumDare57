@@ -34,11 +34,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DensityMultiplier: 0.2
-    - _DensityThreshold: 1.1753218
+    - _DensityThreshold: 1.1990714
     - _LightScattering: 1
-    - _MaxDistance: 50
+    - _MaxDistance: -0.95
     - _NoiseOffset: 8.49
-    - _NoiseTiling: 0.64690363
+    - _NoiseTiling: 0.95748466
     - _StepSize: 0.1
     m_Colors:
     - _Color: {r: 0, g: 0.1407025, b: 0.15471691, a: 1}

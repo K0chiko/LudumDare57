@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "key": "intro_1",
+      "value": {
+        "en": "The earthquake delayed our excavation schedule.\nDue to the depth, we can't drop you exactly at the base, so you'll need to walk a bit.\nRemember, your air tank is still weak and won't last long.\nOnce you reach the base, activate the beacon and we'll send down the bell with oxygen.",
+        "ru": "Это землетрясние помешало нам приступить ко вскрытию объекта вовремя.\nИз-за большой глубины мы не можем спустить тебя точно на базу, поэтому тебе придётся немного пройтись самому.\nПомни что твой баллон пока ещё довольно слабый и потому воздуха надолго тебе не хватит.\nКак прибудешь на базу, включи маяк и мы спустим тебе колокол с запасом кислорода."
+      }
+    },
+    {
+      "key": "cave_found",
+      "value": {
+        "en": "A cave entrance looms ahead. Do you dare enter?",
+        "ru": "Впереди зияет вход в пещеру. Осмелишься ли войти?"
+      }
+    }
+  ]
+}
