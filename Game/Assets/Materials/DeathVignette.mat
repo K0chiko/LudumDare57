@@ -120,7 +120,7 @@ Material:
     - _Surface: 0
     - _VignetteIntensity: 0.93
     - _VignettePower: 2
-    - _VignetteRadius: 2.568015
+    - _VignetteRadius: 3.9482665
     - _VoronoiScale: 5
     - _VoronoiSpeed: 2
     - _VoronoiTime: 5.39
@@ -128,7 +128,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: -0.010252906, g: 0.36407804, b: 0.2517787, a: 1}
+    - _Color: {r: 0.019819077, g: 0.19852275, b: 0.14491162, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
