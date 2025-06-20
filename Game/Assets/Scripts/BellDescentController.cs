@@ -33,9 +33,9 @@ public class BellDescentController : MonoBehaviour
             transform.position += Vector3.down * descentSpeed * Time.deltaTime;
 
             // Покачивание синусоидой
-            float swayX = Mathf.Sin(Time.time * swayFrequency) * swayAmount;
-            float swayZ = Mathf.Cos(Time.time * swayFrequency * 0.8f) * swayAmount;
-            transform.position += new Vector3(swayX, 0, swayZ);
+            float swayX = Mathf.Sin(Time.deltaTime * swayFrequency) * swayAmount;
+            float swayZ = Mathf.Cos(Time.deltaTime * swayFrequency * 0.8f) * swayAmount;
+            if (Time.timeScale > 0) transform.position += new Vector3(swayX, 0, swayZ);
         }
         else if (!_doorOpening)
         {
@@ -54,8 +54,8 @@ public class BellDescentController : MonoBehaviour
             transform.position += Vector3.up * descentSpeed * Time.deltaTime;
 
             // Покачивание синусоидой
-            float swayX = Mathf.Sin(Time.time * swayFrequency) * swayAmount;
-            float swayZ = Mathf.Cos(Time.time * swayFrequency * 0.8f) * swayAmount;
+            float swayX = Mathf.Sin(Time.deltaTime * swayFrequency) * swayAmount;
+            float swayZ = Mathf.Cos(Time.deltaTime * swayFrequency * 0.8f) * swayAmount;
             transform.position += new Vector3(swayX, 0, swayZ);
 
             Quaternion targetRotation = Quaternion.Euler(-doorOpenRotation);
