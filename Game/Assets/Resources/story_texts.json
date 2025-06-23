@@ -8,10 +8,10 @@
       }
     },
     {
-      "key": "cave_found",
+      "key": "intro_2",
       "value": {
-        "en": "A cave entrance looms ahead. Do you dare enter?",
-        "ru": "Впереди зияет вход в пещеру. Осмелишься ли войти?"
+        "en": "The earthquake has made this rock formation unstable.\nYou should be careful.",
+        "ru": "Землетрясение сделало эту скалу неустойчивой.\nНужно быть осторожнее."
       }
     }
   ]

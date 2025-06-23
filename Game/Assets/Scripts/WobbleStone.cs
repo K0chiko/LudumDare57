@@ -7,7 +7,7 @@ public class WobbleStone : MonoBehaviour
     public float wobbleStrength = 0.01f;
 
     [Tooltip("Задержка перед снятием ограничений")]
-    public float unfreezeDelay = 2f;
+    public float unfreezeDelay = 2.5f;
 
     private Rigidbody rb;
     private AudioSource audioSource;
@@ -35,6 +35,7 @@ public class WobbleStone : MonoBehaviour
 
     private System.Collections.IEnumerator Wobble()
     {
+        yield return new WaitForSeconds(1f);
         float timer = 0f;
         float duration = unfreezeDelay;
 
