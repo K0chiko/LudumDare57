@@ -1715,6 +1715,7 @@ MonoBehaviour:
   _headBone: {fileID: 6044159111065775861}
   _positonOffset: {x: 0, y: 0, z: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
+  volumetric: {fileID: 0}
 --- !u!1 &5403032428067713898
 GameObject:
   m_ObjectHideFlags: 0

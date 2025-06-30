@@ -26,6 +26,9 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
+        [Tooltip("Rotation speed of the character")]
+        public float RotationSpeed = 1.0f;
+
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         public AudioClip jetpackClip;
@@ -62,8 +65,13 @@ namespace StarterAssets
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
 
-
-
+        [Header("Cinemachine")]
+        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
+        public GameObject CinemachineCameraTarget;
+        [Tooltip("How far in degrees can you move the camera up")]
+        public float TopClamp = 90.0f;
+        [Tooltip("How far in degrees can you move the camera down")]
+        public float BottomClamp = -90.0f;
 
 
         // player
@@ -88,6 +96,8 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
+
+        private float _cinemachineTargetPitch;
 
         private PlayerInput _playerInput;
 
@@ -152,6 +162,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            CameraRotation();
         }
 
         private void LateUpdate()
@@ -250,26 +261,53 @@ namespace StarterAssets
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg ;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
+                // move
+                inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+                /*                inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+                                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                                    RotationSmoothTime);
 
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                                // rotate to face input direction relative to camera position
+                                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);*/
             }
+            _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) 
+                + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            /*_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);*/
 
             // update animator if using character
             if (_hasAnimator)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }
+        }
+
+        private void CameraRotation()
+        {
+            // if there is an input
+            if (_input.look.sqrMagnitude >= _threshold)
+            {
+                //Don't multiply mouse input by Time.deltaTime
+                //float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+
+                _cinemachineTargetPitch -= _input.look.y * RotationSpeed * Time.deltaTime/*deltaTimeMultiplier*/;
+                _rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/*deltaTimeMultiplier*/;
+
+                // clamp our pitch rotation
+                _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+
+                // Update Cinemachine camera target pitch
+                CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+
+                // rotate the player left and right
+                transform.Rotate(Vector3.up * _rotationVelocity);
             }
         }
 
