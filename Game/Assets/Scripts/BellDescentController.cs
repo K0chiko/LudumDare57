@@ -1,77 +1,109 @@
 using UnityEngine;
+using Cinemachine;
 
 public class BellDescentController : MonoBehaviour
 {
-    [Header("Спуск")]
-    public float descentSpeed = 0.5f;
-    public float targetDepth = -10f;
+    [Header("Ссылка на виртуальную камеру")]
+    [SerializeField] private CinemachineVirtualCamera vcam;
+
+    [Header("Тряска")]
+    [SerializeField] private float shakeAmplitude = 2f;
+    [SerializeField] private float shakeFrequency = 2f;
+    [SerializeField] private float shakeTime = 5f;
 
     [Header("Покачивание")]
     public float swayAmount = 0.05f;
     public float swayFrequency = 1f;
 
     [Header("Дверь")]
-    public Transform door; // Объект двери
+    public Transform door;
     public Vector3 doorOpenRotation = new Vector3(0, 90, 0);
     public float doorOpenSpeed = 2f;
 
-    private Vector3 _startPos;
-    private bool _doorOpening = false;
-    private bool _timeToUp = false;
+    [Header("Подъём")]
+    public float ascentSpeed = 0.5f;
+    public float stopHeight = 15f;
+
+
+    CinemachineBasicMultiChannelPerlin _noise;
+    float _shakeTimer;
+    bool _playerInside;
+    bool _doorOpening;
+    bool _goingUp;
 
     void Start()
     {
-        _startPos = transform.position;
+        // получаем noise компонент камеры
+        _noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _noise.m_AmplitudeGain = 0;
     }
 
     void Update()
     {
-        // Спуск вниз до нужной глубины
-        if (transform.position.y > targetDepth && !_timeToUp)
+        // пока игрок внутри
+        if (_playerInside && _shakeTimer < shakeTime)
         {
-            // Движение вниз
-            transform.position += Vector3.down * descentSpeed * Time.deltaTime;
+            _shakeTimer += Time.deltaTime;
+            _noise.m_AmplitudeGain = shakeAmplitude;
+            _noise.m_FrequencyGain = shakeFrequency;
 
-            // Покачивание синусоидой
-            float swayX = Mathf.Sin(Time.deltaTime * swayFrequency) * swayAmount;
-            float swayZ = Mathf.Cos(Time.deltaTime * swayFrequency * 0.8f) * swayAmount;
-            if (Time.timeScale > 0) transform.position += new Vector3(swayX, 0, swayZ);
+            // лёгкое покачивание колокола для вида
+            SwayBell();
         }
-        else if (!_doorOpening)
+        // игрок вышел или время вышло 
+        else if (!_goingUp)
         {
-            _doorOpening = true;
+            _noise.m_AmplitudeGain = 0;          // стоп тряску
+            _doorOpening = true;                 // открываем дверь
         }
 
-        // Открытие двери
+        // плавное открытие двери
         if (_doorOpening)
         {
-            Quaternion targetRotation = Quaternion.Euler(doorOpenRotation);
-            door.localRotation = Quaternion.Lerp(door.localRotation, targetRotation, Time.deltaTime * doorOpenSpeed);
+            var targetRot = Quaternion.Euler(doorOpenRotation);
+            door.localRotation = Quaternion.Lerp(door.localRotation, targetRot,
+                                                 Time.deltaTime * doorOpenSpeed);
         }
 
-        if (_timeToUp && transform.position.y < 15)
+        // подъём колокола после выхода
+        if (_goingUp && transform.position.y < stopHeight)
         {
-            transform.position += Vector3.up * descentSpeed * Time.deltaTime;
-
-            // Покачивание синусоидой
-            float swayX = Mathf.Sin(Time.deltaTime * swayFrequency) * swayAmount;
-            float swayZ = Mathf.Cos(Time.deltaTime * swayFrequency * 0.8f) * swayAmount;
-            transform.position += new Vector3(swayX, 0, swayZ);
-
-            Quaternion targetRotation = Quaternion.Euler(-doorOpenRotation);
-            door.localRotation = Quaternion.Lerp(door.localRotation, targetRotation, Time.deltaTime * doorOpenSpeed);
+            var targetRot = Quaternion.Euler(-doorOpenRotation);
+            door.localRotation = Quaternion.Lerp(door.localRotation, targetRot,
+                                                 Time.deltaTime * doorOpenSpeed);
+            transform.position += Vector3.up * ascentSpeed * Time.deltaTime;
+            SwayBell(); // раскачка
         }
-        if (_timeToUp && transform.position.y > 15) Destroy(gameObject);
+        else if (_goingUp && transform.position.y >= stopHeight)
+        {
+            Destroy(gameObject); // колокол уехал
+        }
+    }
+
+    
+    void SwayBell()
+    {
+        float swayX = Mathf.Sin(Time.time * swayFrequency * 0.8f) * swayAmount;
+        float swayZ = Mathf.Cos(Time.time * swayFrequency * 10f) * swayAmount;
+        transform.position += new Vector3(swayX, 0, swayZ) * Time.deltaTime;
+    }
+
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _playerInside = true;   // запускаем тряску
+            _shakeTimer = 0;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _timeToUp = true;
-            Debug.Log(_timeToUp);
-
-
+            _playerInside = false;  // время тряски закончится
+            _goingUp = true;   // начинаем подъём
         }
     }
 }
