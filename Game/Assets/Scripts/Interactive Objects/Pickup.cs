@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.XR;
 public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
 {
     public int pickupValue;
+    public int oxygenValue;
 
     public GameObject pressEPrefab;
     public PressEPrompts promptData;
@@ -64,6 +65,10 @@ public class Pickup : MonoBehaviour, IInteractable, IShowPrompt, IDestroyable
             _gameManager.value = value;
             _uiController.textValue.text = "Value: " + _gameManager.value;
 
+        float oxygen = _gameManager.oxygen;
+        oxygen += oxygenValue;
+        _gameManager.oxygen = oxygen;
+        _uiController.textOxygen.text = "Oxygen: " + _gameManager.oxygen;
 
         Destroy(gameObject);
 
