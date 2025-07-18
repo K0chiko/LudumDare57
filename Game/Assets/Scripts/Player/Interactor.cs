@@ -5,7 +5,7 @@ public class Interactor : MonoBehaviour
     private IInteractable currentInteractable;
     private IInteractable lastInteractable;
 
-    [SerializeField] private Shop _shopMenu;
+    //[SerializeField] private Shop _shopMenu;
 
     private void DetectInteractable()
     {
@@ -73,7 +73,7 @@ public class Interactor : MonoBehaviour
             return !bmg.isBreaching;
 
         if (obj is Shop shop)
-            return !_shopMenu.isUpgrade;
+            return !shop.isUpgrade;
 
         return true;
     }

@@ -1,8 +1,7 @@
 ﻿using StarterAssets;
 using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Windows;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 {
@@ -13,15 +12,19 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
     public ThirdPersonController controller;
     public Inputs inputs;
     public GameObject saleWindow;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button oxygenUpgradeButton;
     public BreathAudioController sfxController;
 
     [Space]
 
     public bool isUpgrade = false;
 
+    
     private OxygenController _oxygenController;
     private UIController _uiController;
     private GameObject _promptInstance;
+    private JSONSaveLoad _saveSystem;
 
     public TextMeshProUGUI oxygenTankText;
     public TextMeshProUGUI jetpackText;
@@ -45,6 +48,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     private void Start()
     {
+        _saveSystem = FindAnyObjectByType<JSONSaveLoad>();
         GameObject gm = GameObject.Find("Oxygen&saveloadController");
         _oxygenController = gm.GetComponent<OxygenController>();
 
@@ -56,6 +60,9 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     public void Interact(GameObject interactor)
     {
+        resumeButton.onClick.RemoveAllListeners();
+        resumeButton.onClick.AddListener(ButtonResume);
+
         ThirdPersonController.Instance.controlEnabled = false;
         Inputs.Instance.cursorLocked = false;
         Inputs.Instance.ApplyCursorState();
@@ -105,6 +112,7 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     public void ButtonResume()
     {
+        _saveSystem.SaveGame();
         isUpgrade = false;
         saleWindow.SetActive(false);
         ThirdPersonController.Instance.controlEnabled = true;
@@ -138,6 +146,8 @@ public class Shop : MonoBehaviour, IInteractable, IShowPrompt
 
     public void ButtonOxygenUpgrade()
     {
+        oxygenUpgradeButton.onClick.RemoveAllListeners();
+        oxygenUpgradeButton.onClick.AddListener(ButtonOxygenUpgrade);
         bool isUpgrade = OxygenUpgrade();
         sfxController.UpgradeAudio(isUpgrade);
     }

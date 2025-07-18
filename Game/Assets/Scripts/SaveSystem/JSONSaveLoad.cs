@@ -55,7 +55,7 @@ public class JSONSaveLoad : MonoBehaviour
         playerData.oxygen = gameManager.oxygen;
         playerData.position = player.transform.position;
 
-        shop.ButtonResume();
+        //shop.ButtonResume();
 
         saveFilePath = Application.persistentDataPath + "/PlayerData.json";
 
